@@ -38,8 +38,19 @@ CREATE TABLE IF NOT EXISTS `member` (
     `point` INT,
     email VARCHAR(100) NOT NULL UNIQUE,
     phone VARCHAR(100) NOT NULL UNIQUE,
-    bookmark INT,
     join_date TIMESTAMP DEFAULT NOW()
+);
+
+
+-- [프로필 공유 계정]
+CREATE TABLE IF NOT EXISTS `profile`(
+	`num` INT PRIMARY KEY AUTO_INCREMENT, 
+    id VARCHAR(30) NOT NULL UNIQUE, -- `member` id 외래키
+	`name` VARCHAR(20) NOT NULL,
+	image_name VARCHAR(50) NOT NULL,
+    image_type VARCHAR(50) NOT NULL,
+	image LONGBLOB NOT NULL,
+    bookmark INT
 );
 
 
