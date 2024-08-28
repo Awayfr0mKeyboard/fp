@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.bitc.project">
+	<logger name="com.bitc.FP">
 		<level value="info" />
 	</logger>
 	
