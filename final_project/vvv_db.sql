@@ -30,27 +30,27 @@
 -- ===================================================== 
 -- [회원 정보 테이블]
 CREATE TABLE IF NOT EXISTS `member` (
-    `num` INT PRIMARY KEY AUTO_INCREMENT, 
-    id VARCHAR(30) NOT NULL UNIQUE,
+    `num` INT PRIMARY KEY AUTO_INCREMENT,
+	email VARCHAR(100) NOT NULL UNIQUE,
     pass VARCHAR(30) NOT NULL,
-    `name` VARCHAR(20) NOT NULL,
     age INT(3),
     `point` INT,
-    email VARCHAR(100) NOT NULL UNIQUE,
     phone VARCHAR(100) NOT NULL UNIQUE,
     join_date TIMESTAMP DEFAULT NOW()
 );
 
+-- DROP TABLE IF EXISTS ;
 
 -- [프로필 공유 계정]
 CREATE TABLE IF NOT EXISTS `profile`(
 	`num` INT PRIMARY KEY AUTO_INCREMENT, 
-    id VARCHAR(30) NOT NULL UNIQUE, -- `member` id 외래키
+    email VARCHAR(100),
 	`name` VARCHAR(20) NOT NULL,
 	image_name VARCHAR(50) NOT NULL,
     image_type VARCHAR(50) NOT NULL,
 	image LONGBLOB NOT NULL,
-    bookmark INT
+    bookmark INT,
+	FOREIGN KEY (email) REFERENCES `member`(email)
 );
 
 
@@ -65,11 +65,11 @@ CREATE TABLE IF NOT EXISTS board(
 	b_num int PRIMARY KEY AUTO_INCREMENT ,
     b_title VARCHAR(20),
     b_content VARCHAR(255),
-    b_writer VARCHAR(20), -- member의 name 사용
+    email VARCHAR(100), 
     b_regdate TIMESTAMP DEFAULT NOW(),
-    b_viewcnt int
+    b_viewcnt int,
+    FOREIGN KEY (email) REFERENCES `member`(email)
 );
-
 
 -- [컨텐츠 정보 테이블]
 CREATE TABLE IF NOT EXISTS movie(
@@ -88,4 +88,10 @@ CREATE TABLE IF NOT EXISTS movie(
     `comment` VARCHAR(255),
     star int(5.0)
 );
+
+CREATE TABLE IF NOT EXISTS drama LIKE `movie`;
+
+CREATE TABLE IF NOT EXISTS docu LIKE `movie`;
+
+CREATE TABLE IF NOT EXISTS ent LIKE `movie`;
  
