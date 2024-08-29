@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
+<link rel="stylesheet" href="${path}/resources/css/footer_style.css"> 
+
   <!-- 푸터 -->
   <footer class="footer">
     <p>&copy; 2024 viviview All right reserved</p>
