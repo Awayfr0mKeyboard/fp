@@ -1,0 +1,84 @@
+* {
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    color: white;
+}
+
+body {
+	display: block;
+	position: relative;
+	margin-top: 100px;
+	background: #000000;
+}
+
+.profileHeader {
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.profileName {
+	display: inline-block;
+	height: 30px;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+
+.wrapper {
+	width: 510px;
+	height: auto;
+	margin: auto;
+	background: #000000;
+}
+
+.wrapper h2 {
+	font-size: 30px;
+}
+
+.profile, .optionalList {
+	border: 2px solid rgba(255, 255, 255, .2);	
+	border-radius: 20px;
+	background: #000000;
+	margin-top: 30px;
+}
+
+.first {
+	padding: 20px;
+	margin-top: 30px
+}
+
+tr td .title {
+	font-size: 20px;
+	margin-top: 20px;
+	color: white;
+}
+
+tr td .sub {
+	font-size: 16px;
+	margin-bottom: 20px;
+	color: white;
+}
+
+.optional {
+	margin-top: 70px;
+}
+
+.profileDel {
+	margin-top: 50px;
+	border: 2px solid rgba(255, 255, 255, .2);
+	border-radius: 5px;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.profileDel p {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.warnning {
+	text-align: center;
+}

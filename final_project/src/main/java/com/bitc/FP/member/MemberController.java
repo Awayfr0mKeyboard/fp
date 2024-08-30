@@ -20,4 +20,14 @@ public class MemberController {
 	public void find() {
 		
 	}
+	
+	@GetMapping("profileEdit")
+	public void porfileEdit() {
+		
+	}
+	
+	@GetMapping("withdraw")
+	public void withdraw() {
+		
+	}
 }
