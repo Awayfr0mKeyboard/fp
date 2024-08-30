@@ -17,7 +17,7 @@
       <a href="${path}/contents/movies/movies_detail">영화</a> <!-- 세부메뉴 -->
       <a href="#">예능</a>
       <a href="#">다큐멘터리</a>
-      <a href="#">커뮤니티</a>
+      <a href="${path}/board/board_list">커뮤니티</a>
       <i class='bx bx-search'></i><!-- search 아이콘 --> <a href="#">검색</a>
       <a href="${path}/member/login">로그인</a>
       <a href="#">내 정보</a> <!-- 세부메뉴 -->

@@ -34,12 +34,10 @@ CREATE TABLE IF NOT EXISTS `member` (
 	email VARCHAR(100) NOT NULL UNIQUE,
     pass VARCHAR(30) NOT NULL,
     age INT(3),
-    `point` INT,
+    `point` INT DEFAULT '0',
     phone VARCHAR(100) NOT NULL UNIQUE,
     join_date TIMESTAMP DEFAULT NOW()
 );
-
--- DROP TABLE IF EXISTS ;
 
 -- [프로필 공유 계정]
 CREATE TABLE IF NOT EXISTS `profile`(
@@ -52,7 +50,6 @@ CREATE TABLE IF NOT EXISTS `profile`(
     bookmark INT,
 	FOREIGN KEY (email) REFERENCES `member`(email)
 );
-
 
 -- [회원 탈퇴 시 회원 정보 저장 테이블]
 CREATE TABLE IF NOT EXISTS member_backup LIKE `member`;
@@ -70,6 +67,7 @@ CREATE TABLE IF NOT EXISTS board(
     b_viewcnt int,
     FOREIGN KEY (email) REFERENCES `member`(email)
 );
+
 
 -- [컨텐츠 정보 테이블]
 CREATE TABLE IF NOT EXISTS movie(
