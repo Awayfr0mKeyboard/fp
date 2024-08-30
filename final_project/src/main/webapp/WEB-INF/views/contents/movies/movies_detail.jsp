@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VVV - 라라랜드</title>
     <link rel="stylesheet" href="${path}/resources/css/movies_detail_styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
     
 </head>
 
@@ -21,8 +22,8 @@
                 <h1>라라랜드</h1>
                 <p>2016 • 127분 • 드라마</p>
                 <button class="watchbutton">시청하기</button>
-                <p class="description">꿈을 꾸는 사람들을 위한 별들의 도시 '라라랜드'. 재즈 피아니스트 '세바스찬'과
-                배우 지망생 '미아', 인생에서 가장 빛나는 순간 만난 두 사람은 미완성인 서로의 무대를 만들어가기 시작한다.</p>
+                <p class="description">꿈을 꾸는 사람들을 위한 별들의 도시 '라라랜드'. 재즈 피아니스트 '세바스찬'과<br/>
+                배우 지망생 '미아', 인생에서 가장 빛나는 순간 만난 두 사람은 미완성인<br/> 서로의 무대를 만들어가기 시작한다.</p>
            		<p>평점 ★★★★★</p>
            		<p>♡ 좋아요 &nbsp; &nbsp; &nbsp; &nbsp; 공유하기</p>
            		<br/> 
