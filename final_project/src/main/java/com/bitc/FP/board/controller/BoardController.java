@@ -23,6 +23,7 @@ public class BoardController {
 	
 	private final BoardService bs;
 
+	// 게시판 목록
 	@GetMapping("board_list")
 	public void board_list(
 			Criteria cri, Model model,
@@ -38,6 +39,20 @@ public class BoardController {
 			session.removeAttribute("msg");
 		}
 	} // end board_list method
+	
+	// 게시판 상세보기
+	@GetMapping("board_detail")
+	public void board_detail(int b_num, Model model) throws Exception{
+		BoardVO vo = bs.read(b_num);
+		model.addAttribute("board", vo);
+	} // end board_detail method
+	
+	// 게시글 작성 페이지
+	@GetMapping("board_write")
+	public void board_write() throws Exception {
+		
+	}
+	
 	
 	
 } // end BoardController class

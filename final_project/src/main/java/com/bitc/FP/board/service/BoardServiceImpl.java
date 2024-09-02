@@ -30,9 +30,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVO read(int bno) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public BoardVO read(int b_num) throws Exception {
+		return dao.read(b_num);
 	}
 
 	@Override

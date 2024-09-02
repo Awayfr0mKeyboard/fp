@@ -4,14 +4,15 @@
 
 <%@ include file="../common/header.jsp" %>
 
-<link rel="stylesheet" href="${path}/resources/css/board_list_style.css"> 
-
+<head>
 <title>vivi board</title>
+	<link rel="stylesheet" href="${path}/resources/css/board_list_style.css?after">
+</head>
 
 <div class="container">
 	<h1 class="commu_title">커뮤니티</h1>
 	<div>
-		<a class="btn btn-primary" href="#">글 작성</a>
+		<a class="btn btn-primary" href="${path}/board/board_write">글 작성</a>
 	</div>
 	<table class="table table-hover">
 		<tr>
@@ -24,14 +25,14 @@
 		<c:choose>
 			<c:when test="${!empty list}">
 				<c:forEach var="b" items="${list}">
-					<tr onclick="detail('${b.b_num}');">
-						<td>${b.b_num}</td>
-						<td>${b.b_title}</td>
-						<td>${b.email}</td>
-						<td>
+					<tr onclick="detail('${b.b_num}');" >
+						<td class="board-rows">${b.b_num}</td>
+						<td class="board-rows">${b.b_title}</td>
+						<td class="board-rows">${b.email}</td>
+						<td class="board-rows">
 							<f:formatDate value="${b.b_regdate}" pattern="yyyy/MM/dd hh:mm" />
 						</td>
-						<td>${b.b_viewcnt}</td>
+						<td class="board-rows">${b.b_viewcnt}</td>
 					</tr>
 				</c:forEach>
 			</c:when>
