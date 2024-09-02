@@ -1,3 +1,4 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../common/header.jsp" %>
@@ -116,15 +117,17 @@
 					</tr>
 				</table>
 				<hr />
-				<table> <!-- 결제 -->
-					<tr>
-						<td class="first" rowspan="2"><i class='bx bxs-credit-card'></i></td>
-						<td><p class="title">결제</p></td>
-					</tr>
-					<tr>
-						<td><p class="sub">결제 설정 변경</p></td>
-					</tr>
-				</table>
+				<div id="payment" style="cursor: pointer;">
+					<table> <!-- 결제 -->
+						<tr>
+							<td class="first" rowspan="2"><i class='bx bxs-credit-card'></i></td>
+							<td><p class="title">결제</p></td>
+						</tr>
+						<tr>
+							<td><p class="sub">결제 설정 변경</p></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 		
@@ -133,9 +136,19 @@
 		</div>
 			<p class="warnning">기본 프로필은 삭제할 수 없습니다.<p>
 			<!-- ajax 써야해서 임시로 만듦 -->
-			<a href="${path}/member/withdraw">회원 탈퇴</a>
+			<button id="openModal">프로필 삭제 모달</button>
+			
+			<!-- 모달을 포함할 빈 div -->
+			<div id="modalContainer"></div>
 	</div>
 	
 </body>
+
+<script>
+	document.getElementById("payment").addEventListener("click", function() {
+		window.location.href="${path}/member/payment";
+	});
+</script>
+
 </html>
 <%@ include file="../common/footer.jsp" %>

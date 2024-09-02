@@ -26,6 +26,11 @@ public class MemberController {
 		
 	}
 	
+	@GetMapping("payment")
+	public void payment() {
+		
+	}
+	
 	@GetMapping("withdraw")
 	public void withdraw() {
 		

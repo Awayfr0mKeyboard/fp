@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>프로필 선택 - viviview</title>
+<title>VVV - 프로필 선택</title>
 </head>
 <body>
 
