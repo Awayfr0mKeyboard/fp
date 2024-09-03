@@ -7,7 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bitc.FP.board.service.BoardService;
 import com.bitc.FP.board.vo.BoardVO;
@@ -38,20 +40,38 @@ public class BoardController {
 			model.addAttribute("msg", msg);
 			session.removeAttribute("msg");
 		}
-	} // end board_list method
+	}
 	
 	// 게시판 상세보기
 	@GetMapping("board_detail")
 	public void board_detail(int b_num, Model model) throws Exception{
 		BoardVO vo = bs.read(b_num);
 		model.addAttribute("board", vo);
-	} // end board_detail method
+	}
+	
+	// 조회수 증가
+	@GetMapping("detail")
+	public String detail(int b_num, RedirectAttributes rttr) throws Exception{
+		bs.updateCnt(b_num);
+		rttr.addAttribute("b_num", b_num);
+		return "redirect:/board/board_detail";
+	}
 	
 	// 게시글 작성 페이지
 	@GetMapping("board_write")
 	public void board_write() throws Exception {
-		
+		// ${path}/board/board_write.jsp
 	}
+	
+	// 게시글 작성 완료시
+	@PostMapping("board_write")
+	public String board_write(BoardVO board, HttpSession session) throws Exception {
+		String message = bs.regist(board);
+		session.setAttribute("msg", message);
+		return "redirect:/board/board_list";
+	}
+	
+
 	
 	
 	

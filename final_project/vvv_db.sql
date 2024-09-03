@@ -68,6 +68,7 @@ CREATE TABLE IF NOT EXISTS board(
     FOREIGN KEY (email) REFERENCES `member`(email)
 );
 
+SELECT * FROM board;
 
 -- [컨텐츠 정보 테이블]
 CREATE TABLE IF NOT EXISTS movie(

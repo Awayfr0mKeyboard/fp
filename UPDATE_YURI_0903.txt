@@ -1,0 +1,12 @@
+작업내용)
+- 게시글 작성 페이지 생성
+- 게시글 상세 페이지 HTML, CSS 코드 수정
+- 게시글 조회수 증가 기능 작성중(못했음)
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+수정한 파일)
+- BoardController, BoardDAO, BoardServiceImpl.java
+- board_write, board_detail.jsp
+- board_detail_style.css
+
+생성한 파일)
+- board_write_style.css

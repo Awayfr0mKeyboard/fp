@@ -4,14 +4,13 @@
 <%@ include file="../common/header.jsp" %>
 
 <head>
+	<title>${board.b_num} 번째 게시글</title>
 	<link rel="stylesheet" href="${path}/resources/css/board_detail_style.css?after">
 </head>
 
-<title>${board.b_num} 번째 게시글</title>
-
 <div class="container">
 	<div>
-		<h1 class="commu_title">게시글 상세</h1>
+		<h1 class="commu_title">${board.b_num} 번째 게시글</h1>
 	</div>
 	<div class="row m-5">
 		<div class="col-md-2">

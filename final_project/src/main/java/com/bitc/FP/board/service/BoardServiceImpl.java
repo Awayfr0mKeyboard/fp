@@ -19,13 +19,14 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public String regist(BoardVO board) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		int result = dao.create(board);
+		String message = (result == 1) ? "SUCCESS" : "FAILED";
+		return message;
 	}
 
 	@Override
-	public void updateCnt(int bno) throws Exception {
-		// TODO Auto-generated method stub
+	public void updateCnt(int b_num) throws Exception {
+		dao.updateCnt(b_num);
 
 	}
 

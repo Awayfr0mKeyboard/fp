@@ -5,7 +5,7 @@
 <%@ include file="../common/header.jsp" %>
 
 <head>
-<title>vivi board</title>
+	<title>vivi board</title>
 	<link rel="stylesheet" href="${path}/resources/css/board_list_style.css?after">
 </head>
 

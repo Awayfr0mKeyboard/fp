@@ -21,7 +21,7 @@ public interface BoardDAO {
 	 * @param BoardVO db에 등록할 게시글 정보
 	 * @return 등록된 게시글 개수를 수로 반환
 	 */
-	@Insert("")
+	@Insert("INSERT INTO board(b_title,b_content,email) VALUES(#{b_title}, #{b_content}, #{email})")
 	int create(BoardVO vo) throws Exception;
 
 	/**
@@ -56,8 +56,8 @@ public interface BoardDAO {
 	 * 
 	 * @param bno - 조회수 증가 시킬 게시글 번호
 	 */
-	@Update("")
-	void updateCnt(int bno) throws Exception;
+	@Update("UPDATE board SET b_viewcnt = #{b_viewcnt} + 1 WHERE b_num = #{b_num}")
+	void updateCnt(int b_num) throws Exception;
 
 	/**
 	 * 전체 게시글 목록
