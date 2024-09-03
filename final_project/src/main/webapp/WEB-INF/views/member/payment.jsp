@@ -13,7 +13,7 @@
 
 </head>
 <body>
-
+	<form action="" method="POST">
 	<div class="wrapper">
 		<h1>원하는 멤버십을 선택하세요.</h1>
 		
@@ -114,9 +114,25 @@
 				</li>
 			</ul>
 		</div>
-	
-		<button class="nextBtn">다음</button>
+		<!-- 모달 트리거 버튼 -->
+		<button class="nextBtn" type="button" 
+			data-bs-toggle="modal" data-bs-target="#paymentModal" 
+			onclick="openPaymentModal()">결제</button>
 	</div>
+	</form>	
+	
+	<!-- 모달 창 -->
+	<div class="modal fade" id="paymentModal" tabindex="-1" 
+		aria-labelledby="modalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+			
+				<!-- 외부 jsp 파일이 들어올 부분 -->
+				
+			</div>
+		</div>
+	</div>
+
 
 </body>
 
@@ -149,6 +165,11 @@
 	    document.querySelector(".commercial").classList.remove("halo");
 	    document.querySelector(".standard").classList.remove("halo");
 	    document.querySelector(".premium").classList.remove("halo");
+	}
+	
+	/* 모달 */
+	function openPaymentModal() {
+		$('.modal-content').load("${path}/member/paymentModal");
 	}
 </script>
 

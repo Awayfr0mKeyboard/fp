@@ -119,6 +119,7 @@
 				<hr />
 				<div id="payment" style="cursor: pointer;">
 					<table> <!-- 결제 -->
+						<!-- 멤버십 가입 내역이랑 만료 날짜만 나오는걸로 수정 -->
 						<tr>
 							<td class="first" rowspan="2"><i class='bx bxs-credit-card'></i></td>
 							<td><p class="title">결제</p></td>
