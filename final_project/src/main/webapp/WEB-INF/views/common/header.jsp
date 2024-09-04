@@ -21,5 +21,6 @@
       <i class='bx bx-search'></i><!-- search 아이콘 --> <a href="#">검색</a>
       <a href="${path}/member/login">로그인</a>
       <a href="${path}/member/profileEdit">내 정보</a> <!-- 세부메뉴 -->
+      <a href="${path}/member/withdraw">마이 페이지</a> <!-- 세부메뉴 -->
     </nav>
   </header>	
