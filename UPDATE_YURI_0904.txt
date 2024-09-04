@@ -1,0 +1,16 @@
+작업내용)
+- 게시글 조회수 증가 기능 구현
+- 게시글 삭제 기능 구현
+- 게시글 수정 페이지&기능 생성
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+수정한 파일)
+- BoardController, BoardDAO, BoardServiceImpl.java
+- board_list, board_detail, board_modify.jsp
+
+생성한 파일)
+- board_modify_style, board_write_style.css
+
+삭제한 파일)
+- board_delete.jsp 
+삭제 사유 : 게시글 상세보기 페이지에서 스크립트의 함수를 이용하여 컨트롤러에 게시글 삭제를 요청하기 때문에 jsp파일 필요없다

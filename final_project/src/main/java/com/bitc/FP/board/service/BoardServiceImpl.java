@@ -20,7 +20,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public String regist(BoardVO board) throws Exception {
 		int result = dao.create(board);
-		String message = (result == 1) ? "SUCCESS" : "FAILED";
+		String message = (result == 1) ? "작성 완료" : "작성 실패";
 		return message;
 	}
 
@@ -42,14 +42,13 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public String modify(BoardVO board) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		int result = dao.update(board);
+		return (result == 1) ? "수정 완료" : "수정 실패";
 	}
 
 	@Override
-	public String remove(int bno) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public String remove(int b_num) throws Exception {
+		return dao.delete(b_num) == 1 ? "삭제 완료" : "삭제 실패" ;
 	}
 
 	@Override

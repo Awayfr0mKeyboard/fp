@@ -71,6 +71,30 @@ public class BoardController {
 		return "redirect:/board/board_list";
 	}
 	
+	// 게시글 수정 페이지
+	@GetMapping("board_modify")
+	public void modify(int b_num, Model model) throws Exception {
+		BoardVO vo = bs.read(b_num);
+		model.addAttribute(vo);
+	}
+	
+	// 게시글 수정 완료
+	@PostMapping("board_modify")
+	public String modify(BoardVO vo, RedirectAttributes rttr) throws Exception {
+		String result = bs.modify(vo);
+		rttr.addAttribute("b_num", vo.getB_num());
+		rttr.addFlashAttribute("msg", result);
+		return "redirect:/board/board_detail";
+	}
+	
+	// 게시글 삭제 
+	@GetMapping("delete")
+	public String remove(int b_num, RedirectAttributes rttr) throws Exception{
+		String msg = bs.remove(b_num);
+		rttr.addFlashAttribute("msg", msg);
+		return "redirect:/board/board_list";
+		
+	}
 
 	
 	

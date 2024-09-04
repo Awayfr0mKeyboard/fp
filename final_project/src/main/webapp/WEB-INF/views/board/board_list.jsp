@@ -80,7 +80,7 @@
 
 <script>
 		function detail(b_num){
-			location.href="${path}/board/board_detail?b_num="+b_num;
+			location.href="${path}/board/detail?b_num="+b_num;
 		}
 </script>
 

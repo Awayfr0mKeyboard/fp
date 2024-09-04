@@ -1,4 +1,4 @@
-/* 게시글 작성 스타일 */
+/* 게시글 수정 스타일 */
 
 /* 전체 배경 색상 */
 body {
@@ -42,6 +42,10 @@ body {
 	color: #ffffff;
 	background-color: #2a2a2a; 
 	border: 1px solid #555555;
+}
+
+.input-form-t {
+	border-radius: 4px;
 	padding: 10px; 
 }
 
@@ -85,7 +89,7 @@ textarea.form-control {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    background-color: #FFA200; 
+        background-color:#FFA200;
 }
 
 .btn:hover {

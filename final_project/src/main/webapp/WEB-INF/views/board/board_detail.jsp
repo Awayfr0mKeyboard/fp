@@ -26,13 +26,12 @@
 		</div>
 		<div class="col-md-10 form-control-plaintext input-form">${board.b_title}</div>
 	</div>
-
 	<div class="row m-5">
 		<div class="col-md-2">
 			<span class="form-control-plaintext">내용</span>
 		</div>
 		<div class="col-md-10">
-			<textarea name="notice_content" class="form-control input-form" rows="10"
+			<textarea class="form-control input-form" rows="10"
 				readonly>${board.b_content}</textarea>
 		</div>
 	</div>
@@ -47,5 +46,13 @@
 		</div>
 	</div>
 </div>
+<script>
+	function deleteNotice(b_num,event){
+		event.preventDefault();
+		if(confirm(b_num+" 게시물을 삭제하시겠습니까?")){
+			location.href='${path}/board/delete?b_num='+b_num;
+		}
+	}
+</script>
 
 <%@ include file="../common/footer.jsp" %>
