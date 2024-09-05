@@ -1,7 +1,9 @@
 package com.bitc.FP.board.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -89,13 +91,24 @@ public class BoardController {
 	
 	// 게시글 삭제 
 	@GetMapping("delete")
-	public String remove(int b_num, RedirectAttributes rttr) throws Exception{
+	public String remove(int b_num, RedirectAttributes rttr) throws Exception {
 		String msg = bs.remove(b_num);
 		rttr.addFlashAttribute("msg", msg);
 		return "redirect:/board/board_list";
 		
 	}
 
+	// 게시글 검색
+	@GetMapping("boardSearch")
+	public String boardSearch(HttpServletRequest request) throws Exception {
+		ArrayList<BoardVO> noticeList = bs.search(request);
+		request.setAttribute("noticeList", noticeList);
+		return "redirect:/board/board_list";
+	}
+
+
+
+			
 	
 	
 	

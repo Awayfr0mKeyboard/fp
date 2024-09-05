@@ -11,9 +11,27 @@
 
 <div class="container">
 	<h1 class="commu_title">커뮤니티</h1>
-	<div>
-		<a class="btn btn-primary" href="${path}/board/board_write">글 작성</a>
+	<div class="search-form">
+		<form action="boardSearch" method="GET">
+			<select name="searchName" class="select-op" >
+				<option value="b_title">제목</option>
+				<option value="email">작성자</option>
+			</select>
+			<input type="text" class="search-input" name="searchValue"  />
+			<input type="submit" class="search-go" value="검색" />
+		</form>
+		<form>
+			<select name="perPageNum" class="select-op"
+			onchange="this.form.submit();">
+				<c:forEach var="i" begin="10" end="30" step="5">
+					<option value="${i}" ${pageMaker.cri.perPageNum eq i ? 'selected' : ''}>${i}개씩 보기</option>
+				</c:forEach>
+			</select>
+		</form>
 	</div>
+<%-- 	<div>
+		<a class="btn btn-primary" href="${path}/board/board_write">글 작성</a>
+	</div> --%>
 	<table class="table table-hover">
 		<tr>
 			<th>글번호</th>
@@ -43,6 +61,9 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
+	<div>
+		<a class="btn-primary" href="${path}/board/board_write">글 작성</a>
+	</div>
 	<ul class="pagination justify-content-center">
 		<c:if test="${pm.first}">
 			<li class="page-item"><a class="page-link" 

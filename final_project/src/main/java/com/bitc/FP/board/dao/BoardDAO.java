@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.bitc.FP.board.vo.BoardVO;
 import com.bitc.FP.common.util.Criteria;
+import com.bitc.FP.common.util.PageMaker;
 
 
 
@@ -87,6 +88,27 @@ public interface BoardDAO {
 	List<BoardVO> listCriteria(Criteria cri) throws Exception;
 	
 	
+	/**
+	 * 검색 결과 게시물 개수 
+	 * 
+	 * @return - 검색 결과 게시물 개수 
+	 * @throws Exception
+	 */
+	@Select()
+	int SearchListCount(String searchName, String searchValue) throws Exception;
+	
+	/**
+	 * 페이징 처리된 검색 결과 게시물 목록
+	 * 
+	 * @param cri
+	 * @return - 
+	 * @throws Exception
+	 */
+	@Select("SELECT COUNT(*) FROM board"
+			+ " WHERE (searchName = #{b_title} AND b_title LIKE CONCAT('%', #{searchValue}, '%'))"
+			+ " OR (searchName <> #{b_title} AND `email` LIKE CONCAT('%', #{searchValue}, '%'))"
+			)
+	List<BoardVO> SearchBoardList(PageMaker pageMaker) throws Exception;
 	
 	
 } // end BoardDAO interface
