@@ -20,15 +20,30 @@ public class MemberController {
 	@GetMapping("profileEdit")
 	public void porfileEdit() {}
 	
+	@GetMapping("membership")
+	public void membership() {}
+	
 	@GetMapping("payment")
 	public void payment() {}
 	
 	@GetMapping("paymentModal")
 	public void paymentModal() {}
 	
+	@GetMapping("changePW")
+	public void changePW() {}
+	
+	@GetMapping("resetPW")
+	public void resetPW() {}
+	
+	@GetMapping("beforeMyPage")
+	public void beforeMyPage() {}
+	
 	@GetMapping("myPage")
 	public void myPage() {}
 
+	@GetMapping("beforeWithdraw")
+	public void beforeWithdraw() {}
+	
 	@GetMapping("withdraw")
 	public void withdraw() {}
 }

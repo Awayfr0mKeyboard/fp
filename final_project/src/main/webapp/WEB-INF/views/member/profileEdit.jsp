@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>VVV - 프로필 설정</title>
+<title>VIVIVIEW - 프로필 설정</title>
 
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <link rel="stylesheet" href="${path}/resources/css/profileEdit.css">
@@ -122,10 +122,10 @@
 						<!-- 멤버십 가입 내역이랑 만료 날짜만 나오는걸로 수정 -->
 						<tr>
 							<td class="first" rowspan="2"><i class='bx bxs-credit-card'></i></td>
-							<td><p class="title">결제</p></td>
+							<td><p class="title">멤버십</p></td>
 						</tr>
 						<tr>
-							<td><p class="sub">결제 설정 변경</p></td>
+							<td><p class="sub">현재 결제한 멤버십 등급</p></td>
 						</tr>
 					</table>
 				</div>

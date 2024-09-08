@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>viviview Login</title>
+<title>VIVIVIEW - 로그인</title>
 
 <link rel="stylesheet" href="${path}/resources/css/login.css">
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -29,13 +29,13 @@
 
         <div class="remember">
             <label><input type="checkbox" />Remember Me?</label>
-            <a href="find">Forgot Password?</a>
+            <a href="${path}/member/find">Forgot Password?</a>
         </div>
     
         <button type="submit" class="btn">Login</button>
     
         <div class="register">
-            <p>Don't have an account? <a href="join">Register</a></p>
+            <p>Don't have an account? <a href="${path}/member/join">Register</a></p>
         </div>
 	</div>
 
