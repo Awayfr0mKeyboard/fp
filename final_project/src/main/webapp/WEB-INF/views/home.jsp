@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ include file="common/header.jsp" %>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+
 <html>
 <head>
 
@@ -83,7 +83,7 @@ body {
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>OTT 서비스 사이트</title>
+    <title>VIVIVIEW HOME</title>
     
 	<!-- Google Fonts: Noto Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -94,10 +94,10 @@ body {
 
   <!-- 배너 -->
   <section class="banner" style="background-image: url('${path}/resources/images/home_banner.jpg');">
-  	<br/> <br/> <br/> <br/> <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  	<br/><br/><br/><br/> <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     <h1>최신 영화 바로 시청하기</h1>
     <p>듄2, 웡카, 분노의 질주:라이드 오어 다이 등 최신 영화를 마음껏 시청할 절호의 기회!</p>
-    <button class="button">보러가기</button>
+    <button class="button" onclick="location.href='${path}/main'" >보러가기</button>
   </section>
 
   <!-- 영화 목록 섹션 -->

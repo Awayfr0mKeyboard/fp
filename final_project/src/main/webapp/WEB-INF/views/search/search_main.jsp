@@ -92,6 +92,10 @@ body {
     
 }
 
+.recent-search h2 {
+    color: white;
+}
+
 .recent-search .search-history {
     margin-top: 10px;
     display: flex;
