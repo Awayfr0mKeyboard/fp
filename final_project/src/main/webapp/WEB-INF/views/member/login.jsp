@@ -15,20 +15,22 @@
 <body>
 
 	<div class="wrapper">
-		<form action="" method="post">
+		<form action="login.sh" method="POST">
 			<h1>Login</h1>
 			<div class="input-box">
-				<input type="text" placeholder="Email or PhoneNumber" required />
+				<input type="text" placeholder="Email or PhoneNumber" name="id" required />
                 <i class='bx bxs-user'></i>
 			</div>
 			<div class="input-box">
-				<input type="password" placeholder="Password" required />
+				<input type="password" placeholder="Password" name="pass" required />
                 <i class='bx bxs-lock-alt' ></i>
 			</div>
 		</form>
 
         <div class="remember">
+        	<!-- 자동 로그인 -->
             <label><input type="checkbox" />Remember Me?</label>
+            <!-- 비밀 번호 찾기 -->
             <a href="${path}/member/find">Forgot Password?</a>
         </div>
     

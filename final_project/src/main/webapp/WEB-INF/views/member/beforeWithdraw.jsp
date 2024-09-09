@@ -30,7 +30,7 @@
     </nav>
 
     <!-- 회원탈퇴 진행 전 비밀번호 확인 -->
-	<form action="" method="POST">
+	<form action="withdraw.sh" method="POST">
 		<div class="wrapper">
 			<div class="upperBox">
 				<p class="title">회원 탈퇴</p>
@@ -44,8 +44,8 @@
 				</div>
 				<div class="inner2">
 					<p>비밀번호 확인</p>
-					<input type="password" name="password" required>
-					<input type="submit" value="확인">
+					<input type="password" name="pass" required>
+					<input type="submit" id="" value="확인">
 				</div>
 			</div>
 		</div>

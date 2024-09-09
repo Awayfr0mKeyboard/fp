@@ -148,36 +148,40 @@
 </section>
 </body>
 
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <script>
-	document.querySelector(".commercial").addEventListener("click", function() {
-		resetHalo();
-		this.classList.add("halo");
-		document.querySelector(".commercialContent").style.display = "block";
-		document.querySelector(".standardContent").style.display = "none";
-		document.querySelector(".premiumContent").style.display = "none";
+	$(document).ready(function () {
+		$(".commercial").click(function () {
+            resetHalo();
+            $(this).addClass("halo");
+            $(".commercialContent").css("display", "block");
+            $(".standardContent").css("display", "none");
+            $(".premiumContent").css("display", "none");
+        });
+
+        $(".standard").click(function () {
+            resetHalo();
+            $(this).addClass("halo");
+            $(".standardContent").css("display", "block");
+            $(".commercialContent").css("display", "none");
+            $(".premiumContent").css("display", "none");
+        });
+
+        $(".premium").click(function () {
+            resetHalo();
+            $(this).addClass("halo");
+            $(".premiumContent").css("display", "block");
+            $(".commercialContent").css("display", "none");
+            $(".standardContent").css("display", "none");
+        });
+        
+        function resetHalo() {
+            $(".commercial").removeClass("halo");
+            $(".standard").removeClass("halo");
+            $(".premium").removeClass("halo");
+        }
 	});
-	
-	document.querySelector(".standard").addEventListener("click", function() {
-		resetHalo();
-		this.classList.add("halo");
-		document.querySelector(".standardContent").style.display = "block";
-		document.querySelector(".commercialContent").style.display = "none";
-		document.querySelector(".premiumContent").style.display = "none";
-	});
-	
-	document.querySelector(".premium").addEventListener("click", function() {
-		resetHalo();
-		this.classList.add("halo");
-		document.querySelector(".premiumContent").style.display = "block";
-		document.querySelector(".commercialContent").style.display = "none";
-		document.querySelector(".standardContent").style.display = "none";
-	});
-	
-	function resetHalo() {
-	    document.querySelector(".commercial").classList.remove("halo");
-	    document.querySelector(".standard").classList.remove("halo");
-	    document.querySelector(".premium").classList.remove("halo");
-	}
 	
 	/* 모달 */
 	function openPaymentModal() {

@@ -42,26 +42,32 @@
 					<p><span id="word">회원탈퇴</span>를 바르게 입력해주세요.</p>
 				</div>
 				<div class="inner2">
-					<input type="text" name="withdrawWord" required oninput="withdrawWord()">
-					<input type="submit" value="확인" disabled>
+					<input type="text" name="withdrawWord" id="withdrawWord" required oninput="withdrawWord()">
+					<input type="submit" id="submit" value="확인" disabled>
 				</div>
 			</div>
 		</div>
 	</form>
 </section>
 
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <script>
-	function withdrawWord() {
-		var button = document.querySelector('input[type="submit"]');
-		var input = document.querySelector('input[name="withdrawWord"]').value.trim();
-		var word = document.getElementById("word").textContent.trim();
-		
-		if (input === word) {
-			button.disabled = false;
-		} else {
-			button.disabled = true;
-		}
-	}
+	// "회원탈퇴" 문구 똑바로 기입 안하면 버튼 작동 X
+	$(document).ready(function() {
+		$("#withdrawWord").on("input", function() {
+			var input = $(this).val().trim();
+			var word = $("#word").text().trim();
+			
+			if (input === word) {
+				$("#submit").prop("disabled", false);
+				$("#submit").css("background", "gray");
+			} else {
+				$("#submit").prop("disabled", true);
+				$("#submit").css("background", "#ffa200");
+			}
+		});
+	});
 </script>
 
 </body>

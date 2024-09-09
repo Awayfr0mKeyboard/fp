@@ -39,6 +39,8 @@ h1 {
 	display: none;
 }
 
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 
 </style>
 
@@ -50,10 +52,13 @@ h1 {
 			<div>
 				<h2></h2>
 				<input type="password">
+				<i class='bx bxs-lock-alt'></i>
 			</div>
 			
-			<button class="deleteBtn">삭제</button>
-			<button class="cancelBtn">취소</button>
+			<div class="btnBox">
+				<input type="button" id="delete" value="삭제" />
+				<input type="button" id="cancel" value="취소" />			
+			</div>
 		</div>
 	</div>
 <!-- 	

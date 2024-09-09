@@ -9,5 +9,13 @@
 </head>
 <body>
 
+<section>
+	<div class="wrapper">
+		<div class="profileBox">
+		
+		</div>
+	</div>
+</section>
+
 </body>
 </html>

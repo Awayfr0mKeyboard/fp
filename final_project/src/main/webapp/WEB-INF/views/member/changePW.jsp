@@ -48,20 +48,20 @@
 				<tr>
 					<td>현재 비밀번호</td>
 					<td>
-						<input type="password" name="current" id="currentPW" required>
+						<input type="password" name="current" id="currentPW" required />
 					</td>
 				</tr>
 				<tr>
 					<td>새 비밀번호</td>
 					<td>
-						<input type="password" name="newPW" id="newPW" required onkeyup="checkPW()">
-						<p class="pwMassage">영문/숫자/특수문자를 조합하여 10~16자 이내로 입력해주세요.</p>
+						<input type="password" name="newPW" id="newPW" required />
+						<p class="pwMessage">영문/숫자/특수문자를 조합하여 10~16자 이내로 입력해주세요.</p>
 					</td>
 				</tr>
 				<tr>
 					<td>새 비밀번호 확인</td>
 					<td>
-						<input type="password" name="checkPW" id="checkPW" required onkeyup="pwMatch()">
+						<input type="password" name="checkPW" id="checkPW" required />
 						<p class="checkPWMessage">비밀번호를 다시 한 번 입력해주세요.</p>
 					</td>
 				</tr>
@@ -70,7 +70,7 @@
 			<!-- 버튼 박스 -->
 			<div class="btnBox">
 				<input type="submit" id="check" value="확인">
-				<input type="button" id="remove" value="새로 입력" onclick="clearForm()">
+				<input type="button" id="remove" value="새로 입력">
 			</div>
 			
 			<!-- 권고사항 -->
@@ -83,58 +83,64 @@
 		</div>
 	</form>
 </section>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <script>
-	// 새로 입력 버튼
-	function clearForm() {
-		document.getElementById("currentPW").value = "";
-		document.getElementById("newtPW").value = "";
-		document.getElementById("checkPW").value = "";
-		document.getElementById("pwMessage").innerText = "영문/숫자/특수문자를 조합하여 10~16자로 입력해주세요.";
-		document.getElementById("pwMessage").style.color = "";
-		document.getElementById("checkPWMessage").innerText = "비밀번호를 다시 한 번 입력해 주세요.";
-		document.getElementById("checkPWMessage").style.color = "";
-	}
 	
-	// 새 비밀번호 확인 (currentPW != newPW)
-	function checkPW() {
-		var currentPW = document.getElementById("currentPW").value;
-		var newPW = document.getElementById("newPW").value;
-		var message = document.getElementById("pwMessage");
-		
-		// 비밀번호 제한 조건
-		var length = /^.{10,16}$/;
-		var criteria = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@$!%*?&]).{10,16}$/;
-		
-		if () {
-			message.innerText = "비밀번호는 10~16자까지 입력 가능합니다.";
-			message.style.color = "";
-		} else if () {
-			message.innerText = "영문/숫자/특수문자 중 2가지 이상 조합하셔야 합니다.";
-			message.style.color = "";
-		} else if () {
-			message.innerText = "현재 사용 중인 비밀번호로 변경할 수 없습니다.";
-			message.style.color = "";
-		} else {
-			message.innerText = "사용 가능한 비밀번호입니다.";
-			message.style.color = "ffa200";
-		}
-		
-	}
+	// 새로 입력 버튼 (작성 내용 초기화)
+	$(document).ready(function() {
+		$("#remove").click(function () {
+	        $("#currentPW").val("");
+	        $("#newPW").val("");
+	        $("#checkPW").val("");
+	        $(".pwMessage").text("영문/숫자/특수문자를 조합하여 10~16자 이내로 입력해주세요.");
+	        $(".pwMessage").css("color", "");
+	        $(".checkPwMessage").text("비밀번호를 다시 한 번 입력해주세요.");
+	        $(".checkPwMessage").css("color", "");
+	    });
+	
+	// // 새 비밀번호 확인 (currentPW != newPW)
+        $("#newPW").on("input", function () {
+            var currentPW = $("#currentPW").val();
+            var newPW = $("#newPW").val();
+            var message = $(".pwMessage");
+
+            // 비밀번호 길이 검사 : 10~16자
+            var length = /^.{10,16}$/;
+            // 영문, 숫자, 특수문자를 조합하여 10~16자
+	        var criteria = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@$!%*?&]).{10,16}$/;
+
+            if (!length.test(newPW)) {
+                message.text("비밀번호는 10~16자까지 입력 가능합니다.");
+                message.css("color", "#f58");
+            } else if (!criteria.test(newPW)) {
+                message.text("영문/숫자/특수문자 중 2가지 이상 조합하셔야 합니다.");
+                message.css("color", "#f58");
+            } else if (newPW === currentPW) {
+                message.text("현재 사용 중인 비밀번호로 변경할 수 없습니다.");
+                message.css("color", "#f58");
+            } else {
+                message.text("사용 가능한 비밀번호입니다.");
+                message.css("color", "#ffa200");
+            }
+        });
 	
 	// 새 비밀번호 확인 (newPW == checkPW)
-	function pwMatch() {
-		var newPW = document.getElementById("newPW").value;
-		var checkPW = document.getElementById("checkPW").value;
-		var message = document.getElementById("checkPWMessage");
-		
-		if (newPW == checkPW) {
-			message.innerText = "입력한 비밀번호가 일치합니다.";
-			message.style.color = "ffa200";
-		} else {
-			message.innerText = "입력한 비밀번호가 서로 일치하지 않습니다.";
-			message.style.color = "";
-		}
-	}
+		$("#checkPW").on("input", function() {
+	        var newPW = $("#newPW").val();
+	        var checkPW = $("#checkPW").val();
+	        var message = $(".checkPWMessage");
+	
+	        if (newPW === checkPW) {
+	            message.text("입력한 비밀번호가 일치합니다.");
+	            message.css("color", "#ffa200");
+	        } else {
+	            message.text("입력한 비밀번호가 서로 일치하지 않습니다.");
+	            message.css("color", "#f58");
+	        }
+	    });
+	});
 </script>
 	
 </body>
