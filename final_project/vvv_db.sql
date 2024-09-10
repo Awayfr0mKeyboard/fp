@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `member` (
     `num` INT PRIMARY KEY AUTO_INCREMENT,
 	email VARCHAR(100) NOT NULL UNIQUE,
     pass VARCHAR(30) NOT NULL,
-    age INT(3),
+    age INT,
     `point` INT,
     phone VARCHAR(100) NOT NULL UNIQUE,
     join_date TIMESTAMP DEFAULT NOW()

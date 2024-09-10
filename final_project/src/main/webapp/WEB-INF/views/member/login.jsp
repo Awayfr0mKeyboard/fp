@@ -15,31 +15,40 @@
 <body>
 
 	<div class="wrapper">
-		<form action="login.sh" method="POST">
+		<form action="${path}/member/login" method="POST">
 			<h1>Login</h1>
 			<div class="input-box">
-				<input type="text" placeholder="Email or PhoneNumber" name="id" required />
+				<input type="text" placeholder="Email or PhoneNumber" name="email" required />
                 <i class='bx bxs-user'></i>
 			</div>
 			<div class="input-box">
 				<input type="password" placeholder="Password" name="pass" required />
                 <i class='bx bxs-lock-alt' ></i>
 			</div>
-		</form>
 
-        <div class="remember">
-        	<!-- 자동 로그인 -->
-            <label><input type="checkbox" />Remember Me?</label>
-            <!-- 비밀 번호 찾기 -->
-            <a href="${path}/member/find">Forgot Password?</a>
-        </div>
-    
-        <button type="submit" class="btn">Login</button>
-    
-        <div class="register">
-            <p>Don't have an account? <a href="${path}/member/join">Register</a></p>
-        </div>
+	        <div class="remember">
+	        	<!-- 자동 로그인 -->
+	            <label><input type="checkbox" />Remember Me?</label>
+	            <!-- 비밀 번호 찾기 -->
+	            <a href="${path}/member/find">Forgot Password?</a>
+	        </div>
+	    
+	        <button type="submit" class="btn">Login</button>
+	    
+	        <div class="register">
+	            <p>Don't have an account? <a href="${path}/member/join">Register</a></p>
+	        </div>
+		</form>
 	</div>
+	
+	<script>
+		window.onload = function() {
+			var msg = "${msg}";
+			if (msg) {
+				alert(msg);
+			}
+		}
+	</script>
 
 </body>
 

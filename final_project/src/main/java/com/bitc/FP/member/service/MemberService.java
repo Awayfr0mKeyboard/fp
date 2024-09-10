@@ -1,16 +1,12 @@
 package com.bitc.FP.member.service;
 
+import com.bitc.FP.member.vo.LoginDTO;
+import com.bitc.FP.member.vo.MemberVO;
+
 public interface MemberService {
 
-	// 로그인
+	boolean memberJoin(MemberVO member);
 	
-	// beforeMyPage
-	
-	// beforeWithdraw
-	
-	// find
-	
-	// membership
-	
+	MemberVO memberLogin(LoginDTO dto);
 	
 }
