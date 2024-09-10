@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>VIVIVIEW - 로그인</title>
 
-<link rel="stylesheet" href="${path}/resources/css/login.css">
+<link rel="stylesheet" href="${path}/resources/css/member/login.css">
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>

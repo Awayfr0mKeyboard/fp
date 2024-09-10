@@ -10,9 +10,9 @@
 <title>VIVIVIEW - 비밀번호 변경</title>
 
 <!-- 네비게이션 바 CSS -->
-<link rel="stylesheet" href="${path}/resources/css/sideMenu.css">
+<link rel="stylesheet" href="${path}/resources/css/member/sideMenu.css">
 <!-- section(비밀번호 확인) CSS -->
-<link rel="stylesheet" href="${path}/resources/css/changePW.css">
+<link rel="stylesheet" href="${path}/resources/css/member/changePW.css">
 
 </head>
 <body>

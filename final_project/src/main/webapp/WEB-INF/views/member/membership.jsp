@@ -10,9 +10,9 @@
 <title>VIVIVIEW - 멤버십</title>
 
 <!-- 네비게이션 바 CSS -->
-<link rel="stylesheet" href="${path}/resources/css/sideMenu.css">
+<link rel="stylesheet" href="${path}/resources/css/member/sideMenu.css">
 <!-- membership CSS -->
-<link rel="stylesheet" href="${path}/resources/css/membership.css">
+<link rel="stylesheet" href="${path}/resources/css/member/membership.css">
 
 </head>
 <body>

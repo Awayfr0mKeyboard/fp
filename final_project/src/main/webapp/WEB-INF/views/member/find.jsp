@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>VIVIVIEW - 비밀번호 찾기</title>
 
-<link rel="stylesheet" href="${path}/resources/css/find.css">
+<link rel="stylesheet" href="${path}/resources/css/member/find.css">
 
 </head>
 <body>

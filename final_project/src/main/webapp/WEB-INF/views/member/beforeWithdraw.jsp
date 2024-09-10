@@ -10,9 +10,9 @@
 <title>VIVIVIEW - 회원 탈퇴</title>
 
 <!-- 네비게이션 바 CSS -->
-<link rel="stylesheet" href="${path}/resources/css/sideMenu.css">
+<link rel="stylesheet" href="${path}/resources/css/member/sideMenu.css">
 <!-- section(비밀번호 확인) CSS -->
-<link rel="stylesheet" href="${path}/resources/css/before.css">
+<link rel="stylesheet" href="${path}/resources/css/member/before.css">
 
 </head>
 <body>

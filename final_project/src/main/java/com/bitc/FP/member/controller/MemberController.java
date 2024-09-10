@@ -11,24 +11,14 @@ public class MemberController {
 	@GetMapping("login")
 	public void login() {}
 	
-	
 	@GetMapping("join")
 	public void join() {}
 	
 	@GetMapping("find")
 	public void find() {}
 	
-	@GetMapping("profileEdit")
-	public void porfileEdit() {}
-	
 	@GetMapping("membership")
 	public void membership() {}
-	
-	@GetMapping("payment")
-	public void payment() {}
-	
-	@GetMapping("paymentModal")
-	public void paymentModal() {}
 	
 	@GetMapping("changePW")
 	public void changePW() {}

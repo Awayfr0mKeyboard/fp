@@ -20,7 +20,8 @@
       <a href="#">커뮤니티</a>
       <i class='bx bx-search'></i><!-- search 아이콘 --> <a href="#">검색</a>
       <a href="${path}/member/login">로그인</a>
-      <a href="${path}/member/profileEdit">내 정보</a> <!-- 세부메뉴 -->
+      <a href="${path}/profile/profileEdit">내 정보</a> <!-- 세부메뉴 -->
+      <a href="${path}/profile/profile">프로필</a> <!-- 세부메뉴 -->
       <a href="${path}/member/withdraw">마이 페이지</a> <!-- 세부메뉴 -->
     </nav>
   </header>	
