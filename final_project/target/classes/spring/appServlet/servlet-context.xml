@@ -21,11 +21,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.bitc.FP" />
-	<context:component-scan base-package="com.bitc.FP.*.controller" />
-	<context:component-scan base-package="com.bitc.FP.*.service" />
-	<context:component-scan base-package="com.bitc.FP.*.dao" />
-	<context:component-scan base-package="com.bitc.FP.*.vo" />
+	<context:component-scan base-package="com.bitc.*.controller" />
+	<context:component-scan base-package="com.bitc.*.service" />
 	
 	
 	

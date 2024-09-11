@@ -38,7 +38,7 @@
 						<td><p class="title">이메일</p></td>
 					</tr>
 					<tr>
-						<td><p class="sub">abcdef123@gmail.com</p></td>
+						<td><p class="sub">${profile.email}</p></td>
 					</tr>
 				</table>
 			</div>
