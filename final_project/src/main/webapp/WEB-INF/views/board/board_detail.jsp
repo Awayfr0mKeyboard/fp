@@ -44,6 +44,9 @@
 			<a href="${path}/board/board_list"
 				class="form-control btn btn-primary">목록</a>
 		</div>
+		<div>
+			<%@ include file="/WEB-INF/views/board/b_comment.jsp" %>
+		</div>
 	</div>
 </div>
 <script>
@@ -54,5 +57,7 @@
 		}
 	}
 </script>
+
+
 
 <%@ include file="../common/footer.jsp" %>

@@ -98,6 +98,7 @@ public class BoardController {
 		
 	}
 
+	/*
 	// 게시글 검색
 	@GetMapping("boardSearch")
 	public String boardSearch(HttpServletRequest request) throws Exception {
@@ -105,6 +106,7 @@ public class BoardController {
 		request.setAttribute("noticeList", noticeList);
 		return "redirect:/board/board_list";
 	}
+	*/
 
 
 
