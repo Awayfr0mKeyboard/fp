@@ -20,6 +20,9 @@
 -- [ALTER 문을 사용하여 테이블 구조 변경]
 -- ALTER TABLE 테이블명 CHANGE COLUMN 기존컬럼명 새컬럼명 데이터타입;
 
+-- [컬럼 추가]
+-- ALTER TABLE 테이블명 ADD COLUMN 추가할 컬럼명 조건 AFTER 기존 컬럼명;
+
 /*
 	TINYBLOB  	2^8 - 1 [256bytes]
 	BLOB	  	2^16-1  [64KB]
@@ -39,6 +42,10 @@ CREATE TABLE IF NOT EXISTS `member` (
     join_date TIMESTAMP DEFAULT NOW()
 );
 
+SELECT * FROM `member`;
+SELECT * FROM `profile`;
+SELECT * FROM `profile_image`;
+
 -- DROP TABLE IF EXISTS ;
 
 -- [프로필 공유 계정]
@@ -46,12 +53,22 @@ CREATE TABLE IF NOT EXISTS `profile`(
 	`num` INT PRIMARY KEY AUTO_INCREMENT, 
     email VARCHAR(100),
 	`name` VARCHAR(20) NOT NULL,
-	image_name VARCHAR(50) NOT NULL,
-    image_type VARCHAR(50) NOT NULL,
-	image LONGBLOB NOT NULL,
-    bookmark INT,
-	FOREIGN KEY (email) REFERENCES `member`(email)
+	`image_num` INT,		-- 프로필 이미지 외래키
+    bookmark INT DEFAULT 0,
+    pass INT NULL,
+	FOREIGN KEY (email) REFERENCES `member`(email),
+    FOREIGN KEY (`image_num`) REFERENCES `profile_image`(`image_num`)
 );
+
+
+-- [프로필 이미지 저장용 테이블]
+CREATE TABLE IF NOT EXISTS `profile_image` (
+	`image_num` INT PRIMARY KEY AUTO_INCREMENT,
+    `image_name` VARCHAR(50) NOT NULL,		-- 이미지 파일 이름
+    `image_type` VARCHAR(50) NOT NULL, 		-- 이미지 MIME 타입
+    `image_data` LONGBLOB NOT NULL			-- 실제 이미지 데이터
+);
+
 
 
 -- [회원 탈퇴 시 회원 정보 저장 테이블]

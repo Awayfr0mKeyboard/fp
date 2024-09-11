@@ -48,11 +48,8 @@ public class MemberController {
 		MemberVO member = ms.memberLogin(dto);
 
 		if (member != null) {
+			// 로그인 성공 시 세션에 사용자 정보를 저장
 			session.setAttribute("member", member);
-
-			// 프로필 정보 조회
-			ProfileVO profile = ps.getProfileByEmail(member.getEmail());
-			session.setAttribute("profile", profile);
 
 			return "redirect:/profile/profile";
 		} else {

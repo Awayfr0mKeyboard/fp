@@ -18,13 +18,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean memberJoin(MemberVO member) {
-		boolean isJoin = dao.memberJoin(member);
-
-		// DB에 MemberVO 객체가 성공적으로 들어가면, 기본 프로필 생성 호출
-		if (isJoin) {
-			ps.defaultProfile(member.getEmail());
-		}
-		return isJoin;
+		return dao.memberJoin(member);
 	}
 
 	@Override
