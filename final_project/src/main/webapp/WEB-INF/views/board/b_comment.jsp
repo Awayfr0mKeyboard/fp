@@ -10,20 +10,28 @@
 	margin-left : 3px;
 }
 
-<!-- 댓글 내용 작성칸 -->
-.commentInsert-textarea {
-	margin-top : 10px;
-	width : 174px;
-}
-	
 <!-- 작성된 댓글 목록 -->
 #comments li{
 	list-style:none;
-	padding:10px;
 	border:1px solid #ccc;
-	margin: 20px 0;
-	height:150px;
+	margin-left : 0;
+	padding-left : 0;
 }
+
+#comments {
+	list-style:none;
+	margin-left : 0;
+	padding-left : 0;
+}
+
+
+<!-- 댓글 수정창 -->
+#modDiv {
+	border:1px solid black;
+	padding:10px;
+	display:none;
+}
+
 	
 </style>
 
@@ -61,7 +69,7 @@
 </div>
 
 <!-- 댓글 리스트 출력 -->
-<div>
+<div class="comments-div">
 	<ul id="comments"></ul>
 </div>
 <br/><br/><br/><br/><br/><br/><br/><br/>
@@ -98,15 +106,16 @@
 			let cAuth = this.email;
 			let cText = this.c_content;
 			console.log(cno+"-"+cAuth+"-"+cText);
-			str += "<li>";
-			str += cno + "-" + cAuth +"<br/><hr/>"+cText;
-			str += "<br/><hr/>";
-			str += getTime(this.regdate);
-			str += "<br/><hr/>";
+			str += "<hr/><li>";
+			str += "["+ cno + "번 댓글]"+"<br/>"+"작성자 : "+cAuth+" | "+getTime(this.c_regdate)+"<br/>";
+			str += cText;
+			str += "<br/>";
 			str += "<button onclick='modDiv(this, "+cno+", \""+cAuth+"\", \""+cText+"\");'>MODIFY</button>";
 			str += "</li>";
 		});
 		
+		$("body").prepend($("#modDiv"));
+		$("#modDiv").css("display","none");
 		$("#comments").html(str);
 	}
 	
@@ -116,17 +125,13 @@
 		console.log(el);
 		$("#modDiv").css("display","none");
 		
-		// $("#modDiv").fadeToggle('slow'); // fadeIn와 fadeOut 를 번갈아 가면서 해줌
-		
 		$("#modCno").html(cno);
 		$("#modText").val(text);
 		$("#modAuth").val(auth);
 		
-		
-		
 		// 이벤트가 발생한 button 태그요소의 부모 li요소 뒤에 수정 창 추가(이동)
 		$(el).parent().after($("#modDiv"));
-		$("#modDiv").slideDown("slow..");
+		$("#modDiv").slideDown("slow");
 	}
 	
 	$("#closeBtn").click(function(){
@@ -155,7 +160,6 @@
 		let cAuth = $("#email").val();
 		let cText = $("#c_content").val();
 		
-		// jQuery ajax
 		$.ajax({
 			type : "POST",
 			url : "${path}/comments",
@@ -166,13 +170,10 @@
 			},
 			dataType : "text",
 			success : function(result){
-				// 응답이 성공하면 실행될 함수, 200
-				// 매개변수를 지정해주면 전달된 데이터도 사용 가능해진다
 				alert(result);
-				
+				getCommentList();
 			},
 			error : function(res){
-				// 에러났을때 실행될 함수
 				console.log(res);
 			}
 		});
@@ -187,18 +188,20 @@
 		let cno = $("#modCno").text(); // innerText
 		let auth = $("#modAuth").val();
 		let text = $("#modText").val();
-	
+		console.log("----------------------------------------");
+		console.log(auth);
+		console.log(text);
 		$.ajax({
 			type : "PUT",
 			url : "${path}/comments/"+cno,
 			headers : {
 				"Content-Type" : "application/json"
 			},
-			// queryString : ?commentText=text&commentAuth=auth
+			// JSON.parse(); == 문자열 type의 json 데이터를 javascript 객체로 변환
 			// JSON.stringify : json 형식의 문자열로 변환
 			data : JSON.stringify({
-				commentText : text,
-				commentAuth : auth
+				c_content : text,
+				email : auth
 			}),
 			dataType : "text",
 			success : function(result){

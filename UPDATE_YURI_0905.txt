@@ -1,7 +1,0 @@
-작업내용)
-- 게시판 검색 기능 작업중
-
-수정한 파일)
-- board_list.jsp
-- board_list_style.css
-- BoardController, BoardDAO, BoardServiceImpl.java
