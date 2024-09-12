@@ -38,6 +38,16 @@
     cursor: pointer;
 }
 
+.modalBody {
+	height: 400px;
+}
+
+.modalimage {
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+}
+
 .profileName, .profilePass {
 	height: 70px;
 }
@@ -73,18 +83,27 @@ button {
         </div>
         <form id="createProfileForm" method="post" enctype="multipart/form-data">
         	<div class="modalBody">
+        	
 	            <div class="profileImage">
-		            <label for="file">Profile Image:</label>
-		            <input type="file" name="file">	            
+	            	<div>
+		            	<p class=""><label for="file">프로필 이미지</label></p>
+		            	<!-- 이미지 띄울 칸 -->
+		            	<div>
+		            		<img id="selectedImage" name="file" src="" alt="Selected Profile Image" style="display: none; width: 100px; height: 100px;">
+		            	</div>
+		            	<div>
+		            		<button class="imageSelect">이미지</button>
+		            	</div>
+	            	</div>
 	            </div>
 	            
         		<div class="profileName">
-		            <label for="name">프로필 이름</label>
+		            <p class=""><label for="name">프로필 이름</label></p>
 		            <input type="text" name="name" required>        		
         		</div>
 	            
 	            <div class="profilePass">
-	            	<label for="pass">프로필 비밀번호</label>
+	            	<p class=""><label for="pass">프로필 비밀번호</label></p>
 		            <input type="password" name="pass">
 	            </div>
         	</div>
@@ -94,3 +113,35 @@ button {
         </form>
     </div>
 </div>
+
+<%@ include file="/WEB-INF/views/profile/imageSelect.jsp" %>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+		// 이미지 선택 모달 요소
+		var modal = $("#imageSelectModal");
+		var btn = $(".imageSelect");
+		var span = $("#closeModal");
+		var form =$("#imageSelectForm");
+		
+		// 모달 열기
+		btn.on("click", function() {
+			console.log("Image Select button clicked!");
+			modal.show();
+		});
+		
+		// 외부 클릭 시 모달 닫기
+		$(window).on("click", function(event) {
+			if ($(event.target).is(modal)) {
+				modal.hide();
+			}
+		});
+	});
+	
+	// 선택한 이미지 URL을 받아서 모달에 이미지 표시
+	function setSelectedImage(imageURL) {
+		// 이미지 src 설정하고 표시
+		$("#selectedImage").attr("src", imageURL).show();
+	}
+</script>
