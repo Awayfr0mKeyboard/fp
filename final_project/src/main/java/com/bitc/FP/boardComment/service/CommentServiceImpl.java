@@ -31,18 +31,16 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public String updateComment(CommentVO vo) throws Exception {
 		int result = dao.update(vo);
-		return result > 0 ? "SUCCESS" : "FAILED";
+		return result > 0 ? "수정성공" : "수정실패";
 	}
 
 	@Override
-	public String deleteComment(int cno) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public String deleteComment(int bc_num) throws Exception {
+		return dao.delete(bc_num) == 1 ? "삭제성공" : "삭제실패";
 	}
 
 	@Override
 	public Map<String, Object> commentPage(Criteria cri, int bno) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

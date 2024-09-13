@@ -2,6 +2,7 @@ package com.bitc.FP.boardComment.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -21,6 +22,9 @@ public interface CommentDAO {
 			+ "c_content = #{c_content}, c_updatedate = now() "
 			+ "WHERE bc_num = #{bc_num}")
 	int update(CommentVO vo) throws Exception;
+
+	@Delete("DELETE FROM b_comment WHERE bc_num = #{bc_num}")
+	int delete(int bc_num) throws Exception;
 	
 	
 } // end CommentDAO interface

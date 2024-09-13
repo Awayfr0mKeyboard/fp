@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,34 +33,32 @@ public class CommentController {
 	// @ResponseBody : 반환되는 값을 데이터 그 자체로 받아들인다. view 페이지 찾지 않음.
 	@ResponseBody
 	// ResponseEntity : 응답에 필요한 부가적인 정보를 저장하는 기능
-	public ResponseEntity<String> addComment(
-			CommentVO comment
-			) {
-		// 지금부터 전달되는 타입
+	public ResponseEntity<String> addComment(CommentVO comment) {
 		HttpHeaders headers = new HttpHeaders();
-		MediaType type = new MediaType("application", "json", Charset.forName("utf-8"));
-		headers.setContentType(type);
+		headers.set("Content-Type","text/plain;charset=utf-8");
+
 		ResponseEntity<String> entity = null;
 		try {
-			String message = cs.addComment(comment); 
-										// 매개변수 3개 : 요청처리 후 결과 데이터, 헤더, 상태코드
-			entity = new ResponseEntity<>("삽입성공", headers, HttpStatus.OK); // 200
+			String message = cs.addComment(comment);
+			entity = new ResponseEntity<>( message , headers , HttpStatus.OK); // 200
 		} catch (Exception e) {
-			entity = new ResponseEntity<>(e.getMessage(), headers, 
-					// HttpStatus.INTERNAL_SERVER_ERROR
+			entity = new ResponseEntity<>(
+					e.getMessage(),
+					headers,
 					HttpStatus.BAD_REQUEST
-					);
-			e.printStackTrace();
+			);
 		}
-
 		return entity;
-	}
+	} // add comment end
 	
 	
 	@GetMapping("/all/{b_num}")
 	public ResponseEntity<List<CommentVO>> list(
 				@PathVariable(name = "b_num") int b_num
 			){
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Content-Type","text/plain;charset=utf-8");
+		
 		ResponseEntity<List<CommentVO>> entity = null;
 		
 		try {
@@ -82,6 +81,9 @@ public class CommentController {
 			@PathVariable int cno, 
 			@RequestBody CommentVO vo
 			){
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Content-Type","text/plain;charset=utf-8");
+		
 		ResponseEntity<String> entity = null;
 		vo.setBc_num(cno);
 		
@@ -92,6 +94,27 @@ public class CommentController {
 			entity = new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		}
 		
+		return entity;
+	}
+	
+	
+	/**
+	 * 삭제 요청 처리
+	 * "${path}/comments/"+cno
+	 */
+	@DeleteMapping("/{cno}")
+	public ResponseEntity<String> delete(
+				@PathVariable(name = "cno") int bc_num
+			){
+		
+		ResponseEntity<String> entity = null;
+		
+		try {
+			String result = cs.deleteComment(bc_num);
+			entity = new ResponseEntity<>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 		return entity;
 	}
 	

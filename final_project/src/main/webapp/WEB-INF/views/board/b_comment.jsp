@@ -3,37 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}" /> 
 
-<style>
-<!-- 게시판과 댓글을 나누는 선 -->
-.line {
-	width : 97%;
-	margin-left : 3px;
-}
-
-<!-- 작성된 댓글 목록 -->
-#comments li{
-	list-style:none;
-	border:1px solid #ccc;
-	margin-left : 0;
-	padding-left : 0;
-}
-
-#comments {
-	list-style:none;
-	margin-left : 0;
-	padding-left : 0;
-}
-
-
-<!-- 댓글 수정창 -->
-#modDiv {
-	border:1px solid black;
-	padding:10px;
-	display:none;
-}
-
-	
-</style>
+<head>
+	<link rel="stylesheet" href="${path}/resources/css/b_comment_style.css?after">
+</head>
 
 <div id="modDiv">
 	<!-- 댓글 수정창 -->
@@ -154,7 +126,7 @@
 		return date.toLocaleString("ko");
 	}
 	
-	
+	// 댓글 생성
 	$("#addBtn").click(function(){
 		// 클릭하면 정보를 서버에 전달 
 		let cAuth = $("#email").val();
@@ -197,7 +169,6 @@
 			headers : {
 				"Content-Type" : "application/json"
 			},
-			// JSON.parse(); == 문자열 type의 json 데이터를 javascript 객체로 변환
 			// JSON.stringify : json 형식의 문자열로 변환
 			data : JSON.stringify({
 				c_content : text,
@@ -211,5 +182,28 @@
 			}
 		});
 	});
+	
+	
+	/*
+	댓글 삭제 요청 처리
+	*/
+	$("#delBtn").click(function(){
+	
+		let cno = $("#modCno").text();
+	
+		$.ajax({
+			type : "DELETE",
+			url : "${path}/comments/"+cno,
+			dataType : "text",
+			success : function(result){
+				alert(result);
+				if(result == "삭제성공"){
+					console.log($("#modDiv").parent());
+					console.log($("#modDiv").parent().first());
+					getCommentList();
+				}
+			}
+		});
+	});	
 	
 </script>
