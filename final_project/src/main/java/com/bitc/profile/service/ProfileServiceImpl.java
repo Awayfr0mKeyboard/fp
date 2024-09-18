@@ -1,12 +1,11 @@
 package com.bitc.profile.service;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.bitc.member.vo.MemberVO;
 import com.bitc.profile.dao.ProfileDAO;
 import com.bitc.profile.vo.ProfileVO;
 
@@ -18,24 +17,40 @@ public class ProfileServiceImpl implements ProfileService {
 
 	private final ProfileDAO dao;
 
-	@Value("${file.upload-dir}")
-	private String uploadDir;
-
-	public String saveProfileImage(MultipartFile file) throws IOException {
-		if (file.isEmpty()) {
-			return null;
-		}
-		String filename = file.getOriginalFilename();
-		File targetFile = new File(uploadDir, filename);
-		file.transferTo(targetFile);
-
-		// 웹에서 접근가능한 경로
-		return "/profileimage/" + filename;
-	}
-
+	// 프로필 생성
 	@Override
-	public void createProfile(ProfileVO profile) {
-		dao.insertProfile(profile);
+	public boolean createProfile(ProfileVO profile) {
+		
+		System.out.println("createProfile Method() ProfileServiceImpl ProfileVO : " + profile);
+		
+		return dao.createProfile(profile);
 	}
 
+	// 사용자 프로필 조회
+	@Override
+	public List<ProfileVO> profileList(String email) {
+		return dao.profileList(email);
+	}
+
+	// 프로필 선택
+	@Override
+	public ProfileVO selectProfile(int num) {
+		return dao.selectProfile(num);
+	}
+
+	// 프로필 삭제
+	@Override
+	public boolean deleteProfile(int num, String email) {
+		
+		return dao.deleteProfile(num, email);
+	}
+
+	// 프로필 수정
+	@Override
+	public boolean updateProfile(ProfileVO profile) {
+		
+		System.out.println("ProfileServiceImpl updateProfile ProfileVO" + profile);
+		
+		return dao.updateProfile(profile);
+	}
 }

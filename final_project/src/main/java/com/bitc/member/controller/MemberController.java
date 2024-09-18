@@ -1,6 +1,7 @@
 package com.bitc.member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -50,8 +51,9 @@ public class MemberController {
 		if (member != null) {
 			// 로그인 성공 시 세션에 사용자 정보를 저장
 			session.setAttribute("member", member);
+	        
+	        return "redirect:/profile/profile";
 
-			return "redirect:/profile/profile";
 		} else {
 			String msg = "이메일 혹은 비밀번호가 일치하지 않습니다.";
 			rttr.addFlashAttribute("msg", msg);

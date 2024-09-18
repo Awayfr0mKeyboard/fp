@@ -21,10 +21,10 @@
 	<nav class="sideMenu">
 		<ul>
 			<li><a href="${path}/home">VIVIVIEW로 돌아가기</a></li>
-			<li><a href="${path}/member/membership">멤버십</a></li>
-			<li><a href="${path}/member/beforeMyPage">개인정보 수정</a></li>
-			<li><a href="${path}/member/changePW">비밀번호 변경</a></li>
-			<li><a href="${path}/member/beforeWithdraw">회원 탈퇴</a></li>
+			<li><a href="${path}/member/membership?email=${sessionScope.member.email}">멤버십</a></li>
+			<li><a href="${path}/member/beforeMyPage?email=${sessionScope.member.email}">개인정보 수정</a></li>
+			<li><a href="${path}/member/changePW?email=${sessionScope.member.email}">비밀번호 변경</a></li>
+			<li><a href="${path}/member/beforeWithdraw?email=${sessionScope.member.email}">회원 탈퇴</a></li>
 		</ul>
 	</nav>
 	

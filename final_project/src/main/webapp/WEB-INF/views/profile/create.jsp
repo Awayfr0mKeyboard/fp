@@ -2,113 +2,53 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
-<style>
-.modal {
-    display: none; /* 숨김 상태로 시작 */
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4); /* 반투명 배경 */
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 600px; /* 넓이 조절 */
-    justify-content: center;
-    align-items: center;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover, .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modalBody {
-	height: 400px;
-}
-
-.modalimage {
-	display: flex;
-	justify-content: center;
-	align-items: center;	
-}
-
-.profileName, .profilePass {
-	height: 70px;
-}
-
-.modalFooter {
-	height: 70px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-button {
-	width: 150px;
-    height: 40px;
-    font-size: 24px;
-    font-weight: 600;
-    color: #e5e5e5;
-    background: #ffa200;
-    border: none;
-    outline: none;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    cursor: pointer;
-}
-</style>
+<link rel="stylesheet" href="${path}/resources/css/profile/create.css">
 
 <!-- create.jsp -->
-<div id="profileModal" class="modal">
-    <div class="modal-content">
+
+<div id="createProfileModal" class="createModal">
+    <div class="createModalcontent">
         <span id="closeModal" class="close">&times;</span>
+        
         <div class="modalHeader">
-	        <h2>프로필 생성</h2>        
+	        <p>프로필 생성</p>        
         </div>
-        <form id="createProfileForm" method="post" enctype="multipart/form-data">
+        
+        <hr/>
+        
+        <form action="create" id="createProfileForm" method="POST">
+        
         	<div class="modalBody">
-        	
-	            <div class="profileImage">
-	            	<div>
-		            	<p class=""><label for="file">프로필 이미지</label></p>
-		            	<!-- 이미지 띄울 칸 -->
-		            	<div>
-		            		<img id="selectedImage" name="file" src="" alt="Selected Profile Image" style="display: none; width: 100px; height: 100px;">
-		            	</div>
-		            	<div>
-		            		<button class="imageSelect">이미지</button>
-		            	</div>
-	            	</div>
+	            <div class="createImage">
+		            <div>
+		        		<p>프로필 이미지</p>
+			            <!-- 이미지 선택하는 버튼 -->
+		            	<input type="button" class="imageSelectBtn" value="이미지 선택">
+		            </div>
+		            <!-- 이미지 띄울 칸 -->
+		            <div class="imageBox">
+			            <img src="${src}" id="selectedImage" >
+			            <input type="hidden" name="image" id="image" required value="${src}">
+		            </div>
 	            </div>
 	            
-        		<div class="profileName">
-		            <p class=""><label for="name">프로필 이름</label></p>
-		            <input type="text" name="name" required>        		
+        		<div class="createName">
+		            <p>프로필 이름</p>
+		            <input type="text" id="name" name="name" required
+		            placeholder="한글 또는 영어로 최대 12자" maxlength="12" pattern="[A-Za-z가-힣]{1,12}">        		
         		</div>
 	            
-	            <div class="profilePass">
-	            	<p class=""><label for="pass">프로필 비밀번호</label></p>
-		            <input type="password" name="pass">
+	            <!-- 비밀번호는 선택적 -->
+	            <div class="createPass">
+	            	<p>프로필 비밀번호</p>
+		            <input type="password" id="pass" name="pass" 
+		            placeholder="숫자 4자리 (필수 X)" maxlength="4" pattern="\d{4}">
 	            </div>
         	</div>
+        	<hr/>
+        	
             <div class="modalFooter">
-	            <button type="submit">생성</button>            
+	            <button class="createProfileBtn" >프로필 생성</button>            
             </div>
         </form>
     </div>
@@ -118,30 +58,74 @@ button {
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script>
-	$(document).ready(function() {
-		// 이미지 선택 모달 요소
-		var modal = $("#imageSelectModal");
-		var btn = $(".imageSelect");
-		var span = $("#closeModal");
-		var form =$("#imageSelectForm");
-		
-		// 모달 열기
-		btn.on("click", function() {
-			console.log("Image Select button clicked!");
-			modal.show();
-		});
-		
-		// 외부 클릭 시 모달 닫기
-		$(window).on("click", function(event) {
-			if ($(event.target).is(modal)) {
-				modal.hide();
+
+	// 유효성 검사
+	$(document).ready(function () {
+		function valid() {
+			// 이미지를 선택했는지 확인
+			var isSelectedImage = $("#selectedImage").attr("src") !== "";
+			// 이름 길이 확인
+			var isName = $("#name").val().length > 0 && $("#name").val().length <= 12;
+			// 비밀번호 유효성 검사
+			var passVal = $("#pass").val();
+			var isPass = passVal === "" || (passVal.length === 4 && /^\d{4}$/.test(passVal));
+			
+			// 모든 조건이 충족된다면 버튼 활성화
+			if (isSelectedImage && isName && isPass) {
+				$(".createProfileBtn").css({
+					"background": "#ffa200",
+					"cursor": "pointer"
+				}).prop("disabled", false);
+			} else {
+				$(".createProfileBtn").css({
+					"background": "#868e96",
+					"cursor": "not-allowed"
+				}).prop("disabled", true);
 			}
+		}
+		
+		// 입력값이 변경될 때마다 유효성 검사
+		$("#name").on("input", valid);
+		$("#pass").on("input", valid);
+		
+		// 이미지가 로드될 때 유효성 검사
+		$("#selectedImage").on("load", valid);
+		
+		valid();
+		
+		
+		// 프로필 생성 버튼 클릭 시 AJAX 요청
+		$(".createProfileBtn").on("click", function (e) {
+			
+			e.preventDefault();
+			
+			var name = $("#name").val();
+		    var image = $("#image").val();
+		    var pass = $("#pass").val();
+
+			console.log("Create Profile Button Clicked");
+		    $.ajax({
+		        url: '${path}/profile/create',
+		        type: 'POST',
+		        data: {
+		            name: name,
+		            image: image,
+		            pass: pass
+		        },
+		        success: function(response) {
+		            // 프로필 생성 성공 후 프로필 목록 갱신
+		            location.reload();
+		        },
+		        error: function(xhr, status, error) {
+		        	console.log("XHR:", xhr);
+		            console.log("Status:", status);
+		            console.log("Error:", error);
+		            alert("프로필 생성에 실패했습니다. 다시 시도해 주세요.");
+		        }
+		    });            
 		});
+		
+		
 	});
 	
-	// 선택한 이미지 URL을 받아서 모달에 이미지 표시
-	function setSelectedImage(imageURL) {
-		// 이미지 src 설정하고 표시
-		$("#selectedImage").attr("src", imageURL).show();
-	}
 </script>

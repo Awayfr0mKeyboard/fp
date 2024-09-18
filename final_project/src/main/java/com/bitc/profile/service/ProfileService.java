@@ -1,13 +1,26 @@
 package com.bitc.profile.service;
 
-import java.io.IOException;
-import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
+
+import com.bitc.member.vo.MemberVO;
 import com.bitc.profile.vo.ProfileVO;
 
 public interface ProfileService {
 
-	String saveProfileImage(MultipartFile file) throws IOException;
-
 	// 프로필 생성 메서드
-	void createProfile(ProfileVO profile);
+	public boolean createProfile(ProfileVO profile);
+	
+	// 사용자 이메일로 프로필 조회
+	public List<ProfileVO> profileList(String email);
+	
+	// 프로필 선택
+	public ProfileVO selectProfile(int num);
+
+	// 프로필 삭제
+	public boolean deleteProfile(int num, String email);
+
+	// 프로필 수정
+	public boolean updateProfile(ProfileVO profile);
+	
+	
 }
