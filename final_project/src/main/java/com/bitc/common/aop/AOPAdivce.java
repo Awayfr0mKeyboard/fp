@@ -25,17 +25,16 @@ public class AOPAdivce {
 		// 실행 시점을 직접 제어할 수 있다
 		// target class의 pointcut method 호출
 		Object obj = pjp.proceed();
-		
-		if(obj != null){
+
+		if (obj != null) {
 			log.info("Around return Object : " + obj);
 		}
-		
+
 		log.info("---------- Around Controller END ------------");
-		
+
 		return obj; // 결과 반환 후 후처리 종료
 	}
-	
-	
+
 	@Around("execution(* com.bitc.FP.*.service.*.*(..))")
 	public Object serviceLog(ProceedingJoinPoint pjp) throws Throwable {
 		log.info("-----------------------------------------------");
@@ -46,15 +45,14 @@ public class AOPAdivce {
 		// 실행 시점을 직접 제어할 수 있다
 		// target class의 pointcut method 호출
 		Object obj = pjp.proceed();
-		
-		if(obj != null){
+
+		if (obj != null) {
 			log.info("Around return Object : " + obj);
 		}
-		
+
 		log.info("---------- Around Service END ------------");
-		
+
 		return obj; // 결과 반환 후 후처리 종료
 	}
-	
-	
+
 } // end AOPAdivce class

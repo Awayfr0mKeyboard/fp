@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
-	
+
 	private final BoardDAO dao;
 
 	@Override
@@ -48,7 +48,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public String remove(int b_num) throws Exception {
-		return dao.delete(b_num) == 1 ? "삭제 완료" : "삭제 실패" ;
+		return dao.delete(b_num) == 1 ? "삭제 완료" : "삭제 실패";
 	}
 
 	@Override

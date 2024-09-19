@@ -13,5 +13,5 @@ public class BoardVO {
 	private String email;
 	private Date b_regdate;
 	private int b_viewcnt;
-	
+
 } // end BoardVO class

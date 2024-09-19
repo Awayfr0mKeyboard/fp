@@ -6,10 +6,8 @@ import com.bitc.board.vo.BoardVO;
 import com.bitc.common.util.Criteria;
 import com.bitc.common.util.PageMaker;
 
-
-
 public interface BoardService {
-	
+
 	/**
 	 * 게시글 작성 - 성공 유무에 따라 메세지 전달
 	 * 
@@ -74,5 +72,5 @@ public interface BoardService {
 	 * @return 페이징 블럭 출력을 위한 정보를 저장하는 PageMaker 객체 반환
 	 */
 	PageMaker getPageMaker(Criteria cri) throws Exception;
-	
+
 } // end BoardService interface

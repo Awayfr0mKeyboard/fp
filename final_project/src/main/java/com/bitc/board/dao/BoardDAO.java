@@ -10,12 +10,7 @@ import org.apache.ibatis.annotations.Update;
 import com.bitc.board.vo.BoardVO;
 import com.bitc.common.util.Criteria;
 
-
-
-
-
 public interface BoardDAO {
-
 
 	/**
 	 * 게시글 작성
@@ -41,8 +36,7 @@ public interface BoardDAO {
 	 * @param BoardVO 수정할 게시글 정보
 	 * @return - 수정된 게시글 개수를 정수로 반환
 	 */
-	@Update("UPDATE board SET b_title = #{b_title}, b_content = #{b_content} "
-			+ " WHERE b_num = #{b_num}")
+	@Update("UPDATE board SET b_title = #{b_title}, b_content = #{b_content} " + " WHERE b_num = #{b_num}")
 	int update(BoardVO vo) throws Exception;
 
 	/**
@@ -69,7 +63,6 @@ public interface BoardDAO {
 	 */
 	@Select("SELECT * FROM board ORDER BY b_num DESC")
 	List<BoardVO> listAll() throws Exception;
-	
 
 	/**
 	 * 전체 게시물 개수
@@ -87,34 +80,31 @@ public interface BoardDAO {
 	 */
 	@Select("SELECT * FROM board ORDER BY b_num DESC limit #{startRow}, #{perPageNum}")
 	List<BoardVO> listCriteria(Criteria cri) throws Exception;
-	
-	
-
 
 	/**
-	 * 검색 결과 게시물 개수 
+	 * 검색 결과 게시물 개수
 	 * 
-	 * @return - 검색 결과 게시물 개수 
+	 * @return - 검색 결과 게시물 개수
 	 * @throws Exception
 	 */
 	/*
-	@Select()
-	int SearchListCount(String searchName, String searchValue) throws Exception;
-	*/
-	
+	 * @Select() int SearchListCount(String searchName, String searchValue) throws
+	 * Exception;
+	 */
+
 	/**
 	 * 페이징 처리된 검색 결과 게시물 목록
 	 * 
 	 * @param cri
-	 * @return - 
+	 * @return -
 	 * @throws Exception
 	 */
 	/*
-	@Select("SELECT COUNT(*) FROM board"
-			+ " WHERE (searchName = #{b_title} AND b_title LIKE CONCAT('%', #{searchValue}, '%'))"
-			+ " OR (searchName <> #{b_title} AND `email` LIKE CONCAT('%', #{searchValue}, '%'))"
-			)
-	List<BoardVO> SearchBoardList(PageMaker pageMaker) throws Exception;
-	*/
-	
+	 * @Select("SELECT COUNT(*) FROM board" +
+	 * " WHERE (searchName = #{b_title} AND b_title LIKE CONCAT('%', #{searchValue}, '%'))"
+	 * +
+	 * " OR (searchName <> #{b_title} AND `email` LIKE CONCAT('%', #{searchValue}, '%'))"
+	 * ) List<BoardVO> SearchBoardList(PageMaker pageMaker) throws Exception;
+	 */
+
 } // end BoardDAO interface

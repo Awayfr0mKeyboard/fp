@@ -14,11 +14,11 @@ public interface ProfileDAO {
 
 	@Insert("INSERT INTO profile (email, name, image, pass) VALUES (#{email}, #{name}, #{image}, #{pass})")
 	boolean createProfile(ProfileVO profile);
-	
+
 	// 사용자 계정으로 프로필 리스트 조회
 	@Select("SELECT * FROM profile WHERE email = #{email}")
 	List<ProfileVO> profileList(String email);
-	
+
 	// 선택한 프로필 정보 가져오기
 	@Select("SELECT num, name, image, email, bookmark, pass FROM profile WHERE num = #{num}")
 	ProfileVO selectProfile(int num);
@@ -30,6 +30,5 @@ public interface ProfileDAO {
 	// 프로필 수정
 	@Update("UPDATE profile SET name = #{name}, pass = #{pass}, image = #{image} WHERE num = #{num}")
 	boolean updateProfile(ProfileVO profile);
-	
-	
+
 }

@@ -18,9 +18,9 @@ public class ProfileServiceImpl implements ProfileService {
 	// 프로필 생성
 	@Override
 	public boolean createProfile(ProfileVO profile) {
-		
+
 		System.out.println("createProfile Method() ProfileServiceImpl ProfileVO : " + profile);
-		
+
 		return dao.createProfile(profile);
 	}
 
@@ -39,16 +39,16 @@ public class ProfileServiceImpl implements ProfileService {
 	// 프로필 삭제
 	@Override
 	public boolean deleteProfile(int num, String email) {
-		
+
 		return dao.deleteProfile(num, email);
 	}
 
 	// 프로필 수정
 	@Override
 	public boolean updateProfile(ProfileVO profile) {
-		
+
 		System.out.println("ProfileServiceImpl updateProfile ProfileVO" + profile);
-		
+
 		return dao.updateProfile(profile);
 	}
 }

@@ -26,87 +26,71 @@ import lombok.RequiredArgsConstructor;
 public class CommentController {
 
 	private final CommentService cs;
-	
+
 	@PostMapping("")
 	// @ResponseBody : 반환되는 값을 데이터 그 자체로 받아들인다. view 페이지 찾지 않음.
 	@ResponseBody
 	// ResponseEntity : 응답에 필요한 부가적인 정보를 저장하는 기능
 	public ResponseEntity<String> addComment(CommentVO comment) {
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("Content-Type","text/plain;charset=utf-8");
+		headers.set("Content-Type", "text/plain;charset=utf-8");
 
 		ResponseEntity<String> entity = null;
 		try {
 			String message = cs.addComment(comment);
-			entity = new ResponseEntity<>( message , headers , HttpStatus.OK); // 200
+			entity = new ResponseEntity<>(message, headers, HttpStatus.OK); // 200
 		} catch (Exception e) {
-			entity = new ResponseEntity<>(
-					e.getMessage(),
-					headers,
-					HttpStatus.BAD_REQUEST
-			);
+			entity = new ResponseEntity<>(e.getMessage(), headers, HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	} // add comment end
-	
-	
+
 	@GetMapping("/all/{b_num}")
-	public ResponseEntity<List<CommentVO>> list(
-				@PathVariable(name = "b_num") int b_num
-			){
+	public ResponseEntity<List<CommentVO>> list(@PathVariable(name = "b_num") int b_num) {
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("Content-Type","text/plain;charset=utf-8");
-		
+		headers.set("Content-Type", "text/plain;charset=utf-8");
+
 		ResponseEntity<List<CommentVO>> entity = null;
-		
+
 		try {
 			List<CommentVO> list = cs.commentList(b_num);
 			entity = new ResponseEntity<>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return entity;
 	}
-	
-	
+
 	/**
-	 * 수정 요청 처리
-	 * "${path}/comments/"+cno
+	 * 수정 요청 처리 "${path}/comments/"+cno
 	 */
 	@PutMapping("/{cno}")
-	public ResponseEntity<String> update(
-			@PathVariable int cno, 
-			@RequestBody CommentVO vo
-			){
+	public ResponseEntity<String> update(@PathVariable int cno, @RequestBody CommentVO vo) {
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("Content-Type","text/plain;charset=utf-8");
-		
+		headers.set("Content-Type", "text/plain;charset=utf-8");
+
 		ResponseEntity<String> entity = null;
 		vo.setBc_num(cno);
-		
+
 		try {
-			String result = cs.updateComment(vo);  // 댓글 수정 요청
+			String result = cs.updateComment(vo); // 댓글 수정 요청
 			entity = new ResponseEntity<>(result, HttpStatus.OK);
 		} catch (Exception e) {
-			entity = new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return entity;
 	}
-	
-	
+
 	/**
-	 * 삭제 요청 처리
-	 * "${path}/comments/"+cno
+	 * 삭제 요청 처리 "${path}/comments/"+cno
 	 */
 	@DeleteMapping("/{cno}")
-	public ResponseEntity<String> delete(
-				@PathVariable(name = "cno") int bc_num
-			){
-		
+	public ResponseEntity<String> delete(@PathVariable(name = "cno") int bc_num) {
+
 		ResponseEntity<String> entity = null;
-		
+
 		try {
 			String result = cs.deleteComment(bc_num);
 			entity = new ResponseEntity<>(result, HttpStatus.OK);
@@ -115,6 +99,5 @@ public class CommentController {
 		}
 		return entity;
 	}
-	
-	
+
 } // end CommentController class
