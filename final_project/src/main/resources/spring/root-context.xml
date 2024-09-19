@@ -24,6 +24,7 @@
 		<property name="dataSource" ref="ds"/>
 	</bean>
 	
-	<mybatis-spring:scan base-package="com.bitc.FP.*.dao"/>
+	<mybatis-spring:scan base-package="com.bitc.*.dao"/>
+	<mybatis-spring:scan base-package="com.bitc.*.*.dao"/>
 		
 </beans>
