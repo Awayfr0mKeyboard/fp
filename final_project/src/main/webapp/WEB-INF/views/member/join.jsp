@@ -166,28 +166,28 @@ input::placeholder {
             
             <label for="email">이메일</label>
             <div class="email-section">
-                <input type="email" id="email" name="email" placeholder="이메일 주소 입력">
+                <input type="email" id="email" name="email" placeholder="이메일 주소 입력" required>
                 <button type="button" class="verify-button email-verify">인증번호 전송</button>
             </div>   
             
             <input type="text"  placeholder="인증 번호 입력">
 
             <label for="password">비밀번호</label>
-            <input type="password" id="password" name="pass" placeholder="영문, 숫자, 특수문자 조합 8~15 자리">
+            <input type="password" id="password" name="pass" placeholder="영문, 숫자 조합 8~30 자리" minlength='8' maxlength='30' required>
 
             <label for="password-confirm">비밀번호 확인</label>
-            <input type="password" id="password-confirm" placeholder="비밀번호 다시 입력">  
+            <input type="password" id="password-confirm" placeholder="비밀번호 다시 입력" required>  
             
             <label for="age">나이</label>
-            <input type="number" id="age" name="age" placeholder="만 14세 이상만 가입 가능합니다.">
+            <input type="number" id="age" name="age" placeholder="만 14세 이상만 가입 가능합니다." min="14" required>
 
             <label for="phone">휴대폰 번호</label>
             <div class="phone-section">
-                <input type="text" id="phone" name="phone" placeholder="휴대폰 번호 입력">
+                <input type="text" id="phone" name="phone" placeholder="휴대폰 번호 입력" required>
                 <button type="button" class="verify-button phone-verify">인증번호 전송</button>
             </div>
 	
-			<input type="text" placeholder="인증 번호 입력">
+			<input type="text" placeholder="인증 번호 입력" required>
 			
             <div class="agreements">
                 <div class="checkbox-item">
@@ -196,17 +196,17 @@ input::placeholder {
                 </div>
 
                 <div class="checkbox-item">
-                    <input type="checkbox" id="age-confirm" name="agree-check" class="checkbox-check neccessarycheck1">
+                    <input type="checkbox" id="age-confirm" name="agree-check" class="checkbox-check necessarycheck1">
                     <label for="age-confirm">[필수] 만 14세 이상입니다.</label>
                 </div>
 
                 <div class="checkbox-item">
-                    <input type="checkbox" id="terms" name="agree-check" class="checkbox-check neccessarycheck2">
+                    <input type="checkbox" id="terms" name="agree-check" class="checkbox-check necessarycheck2">
                     <label for="terms">[필수] 서비스 이용약관 동의</label>
                 </div>
 
                 <div class="checkbox-item">
-                    <input type="checkbox" id="privacy" name="agree-check" class="checkbox-check neccessarycheck3">
+                    <input type="checkbox" id="privacy" name="agree-check" class="checkbox-check necessarycheck3">
                     <label for="privacy">[필수] 개인정보 수집 및 이용 동의</label>
                 </div>
 
@@ -225,9 +225,29 @@ input::placeholder {
             <input type="submit" value="회원가입" class="join-button" disabled /> 
             </div>
             
+            
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.2/sweetalert2.all.min.js"></script>
+            <script>
+    	    window.onload = function() {
+
+    	        var joinFail = "${joinFail}";
+    	        // joinFail 메시지가 존재하면 SweetAlert 창 띄우기
+    	        if (joinFail) {
+    	            Swal.fire({
+    	                title: '알림',
+    	                text: joinFail,
+    	                icon: 'warning',
+    	                confirmButtonColor: '#FFA200',
+    	            });
+    	        }
+    	        
+    	    }
+    	    
+            </script>
+            
+            
             <script src="http://code.jquery.com/jquery-latest.min.js"></script>
             <script>
-            
             $(document).ready(function(){
             	//전체 체크 클릭 시, 나머지 체크 
             	$("#agree-all").click(function(){
@@ -253,15 +273,15 @@ input::placeholder {
             	// 모든 체크박스를 클릭하면 버튼 활성화시키기
             	$('.checkbox-check').click(function(){
             		
-            	    var neccessarycheck1 = $(".neccessarycheck1").prop('checked'); 
-            	    var neccessarycheck2 = $(".neccessarycheck2").prop('checked'); 
-            	    var neccessarycheck3 = $(".neccessarycheck3").prop('checked'); 
+            	    var necessarycheck1 = $(".necessarycheck1").prop('checked'); 
+            	    var necessarycheck2 = $(".necessarycheck2").prop('checked'); 
+            	    var necessarycheck3 = $(".necessarycheck3").prop('checked'); 
             	    
             	    var somecheck = $(".checkbox-check").length;
             	    var checkedbox = $(".checkbox-check:checked").length;
             	    
             	    //선택한 체크박스 값이 true면 버튼 활성화
-            	    if(neccessarycheck1==true && neccessarycheck2==true && neccessarycheck3==true){
+            	    if(necessarycheck1==true && necessarycheck2==true && necessarycheck3==true){
             	    $(".join-button").css({"backgroundColor":"#FFA200","cursor":"pointer","color":"#fff"}).prop("disabled",false);
             	    }
             	    else{

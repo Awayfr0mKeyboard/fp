@@ -2,7 +2,10 @@ package com.bitc.FP.member.service;
 
 import java.lang.reflect.Member;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import com.bitc.FP.member.dao.*;
@@ -19,8 +22,14 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean memberJoin(MemberVO member) {
-		return dao.memberJoin(member);
-	}
+        // 전화번호 & 이메일 중복 체크
+        if (dao.emailExists(member.getEmail()) > 0 || dao.phoneExists(member.getPhone()) > 0) {
+            // 전화번호나 이메일이 이미 존재하는 경우
+            return false;
+        }
+        // 둘 다 존재하지 않는 경우
+        return dao.memberJoin(member);
+    }
 
 	@Override
 	public MemberVO memberLogin(LoginDTO dto) {
@@ -35,9 +44,18 @@ public class MemberServiceImpl implements MemberService {
         return null;  // 로그인 실패
 	}
 
-//	@Override
-//	public void logOut(HttpServletRequest request, HttpServletResponse response) {
-//
-//	}
+	@Override
+	public void logOut(HttpServletRequest request, HttpServletResponse response) {
+		// pageContext(Servlet에는 존재하지 않음) < request < session < application		
+		HttpSession session = request.getSession();
+		// session.removeAttribute("member"); // 세션에 등록된 인증된 회원정보 제거
+		session.invalidate(); // session 무효화
+		
+		// 자동로그인이 등록되어 있다면 쿠키 정보도 제거
+		Cookie cookie = new Cookie("id" , "");
+		cookie.setMaxAge(0);
+		cookie.setPath("/");
+		response.addCookie(cookie);
+	}
 
 }
