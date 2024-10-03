@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Arial', sans-serif;
     color: #e5e5e5;
 }
 
@@ -41,9 +41,11 @@ input[type=password] {
     width: 350px;
     height: 40px;
     margin-right: 10px;
-    padding-left: 10px;
-    font-size: 30px;
-    color: #000000;
+    padding-left: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
 }
 
 tr {
@@ -75,11 +77,11 @@ td p {
     width: 150px;
     height: 40px;
     font-size: 24px;
-    color: #e5e5e5;
-    background: #ffa200;
+    color: white;
+    background: #FFA200;
     border: none;
     outline: none;
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     cursor: pointer;
 }
@@ -89,13 +91,17 @@ td p {
     width: 150px;
     height: 40px;
     font-size: 24px;
-    color: #e5e5e5;
-    background: #f58;
+    color: white;
+    background: #F58;
     border: none;
     outline: none;
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     cursor: pointer;
+}
+
+.btnBox #check:hover, .btnBox #remove:hover {
+	background-color: #ffbe4d;
 }
 /* 버튼 박스 (END) */
 

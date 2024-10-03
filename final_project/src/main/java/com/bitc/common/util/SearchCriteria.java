@@ -1,37 +1,29 @@
 package com.bitc.common.util;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@NoArgsConstructor // 기본 생성자 추가
+@Getter
+@Setter
+@ToString(callSuper = true) // 부모의 ToString 메소드도 호출되도록 함
 public class SearchCriteria extends Criteria {
 
-	// Criteria를 상속받으니 검색에 필요한 것만 필드를 더해준다.
-	private String searchName;
-	private String searchValue;
-
-	public SearchCriteria(int page, int perPageNum, String searchName, String searchValue) {
+	private String searchType;	// 검색 타입
+	private String keyword;		// 검색 키워드
+	
+	// alt + s + a
+	public SearchCriteria(int page, int perPageNum, String searchType, String keyword) {
 		super(page, perPageNum);
-		this.searchName = searchName;
-		this.searchValue = searchValue;
+		this.searchType = searchType;
+		this.keyword = keyword;
 	}
+	
 
-	public String getSearchName() {
-		return searchName;
-	}
-
-	public void setSearchName(String searchName) {
-		this.searchName = searchName;
-	}
-
-	public String getSearchValue() {
-		return searchValue;
-	}
-
-	public void setSearchValue(String searchValue) {
-		this.searchValue = searchValue;
-	}
-
-	@Override
-	public String toString() {
-		return "SearchCriteria [searchName=" + searchName + ", searchValue=" + searchValue + ", toString()="
-				+ super.toString() + "]";
-	}
-
-} // end SearchCriteria class
+	
+	
+	
+	
+}

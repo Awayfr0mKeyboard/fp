@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<link rel="stylesheet" href="${path}/resources/css/header_style.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="${path}/resources/css/header_style.css?after">
 
 <c:set var="path" value="${pageContext.request.contextPath}" scope="session"/>
 
@@ -11,115 +12,71 @@
 
 <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 
-<style>
-	 * {
-    font-family: 'Noto Sans KR', sans-serif;
-  }
-  
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-  }
-
-  .header img {
-    height: 50px;
-  }
-
-  .header .left-array {
-    display: flex;
-    gap: 30px;
-    margin-left: 20px; /* 로고와 left-array 사이의 간격 추가 */
-  }
-
-  .left-array a{
-    color: #e5e5e5;
-    text-decoration: none;
-    font-size: 18px;
-  }
-
-  .header .nav-links {
-    display: flex;
-    gap: 30px;
-    margin-left: auto; /* 오른쪽으로 밀어내어 남은 공간을 차지하게 함 */
-    align-items: center;
-  }
-
-  .header .nav-links a {
-    color: #e5e5e5;
-    text-decoration: none;
-    font-size: 18px;
-  }
-
-  .header a:hover {
-    text-decoration: underline;
-  }
-
-  i {
-    color: #fff;
-  }
-  
-
-  
-
-</style>
-
 <!-- iconbox 설정 -->
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 <!-- 네비게이션 바 -->
 <header class="header">
-  <a href="${path}/home"><img src="${path}/resources/images/logo.png" alt="Logo"></a>
+  <a href="${path}/home"><img src="${path}/resources/images/logo.png" alt="Logo" class="header-logo"></a>
   <div class="left-array">
-    <a href="#">드라마</a> 
-    <a href="${path}/contents/movies/movies">영화</a>
-    <a href="#">예능</a>
-    <a href="#">다큐멘터리</a>
-    <a href="${path}/board/board_list">커뮤니티</a>
+    <a href="#" class="dramaLink">드라마</a> 
+    <a href="${path}/contents/movies/movies" class="movieLink">영화</a>
+    <a href="#" class="varietyLink">예능</a>
+    <a href="#" class="docuLink">다큐멘터리</a>
+    <a href="${path}/board/board_list" class="commuLink">커뮤니티</a>
   </div>
   <nav class="nav-links">
-    <a href="${path}/search/search_main"><i class='bx bx-search'></i> 검색</a>
+    <a href="${path}/search/search_main" class="searchLink"><i class='bx bx-search'></i> 검색</a>
     
-<c:choose>
+    <c:choose>
+      
       	<c:when test="${!empty sessionScope.member}">
-      		<a href="${path}/member/myPage?email=${sessionScope.member.email}">${member.email}님의 마이페이지</a>
       		
       		<div class="profileMenu">
 		    	<!-- 현재 내가 접속한 프로필 -->
 		    	<c:if test="${!empty currentProfile}">
-	      			<div class="currentProfile" >
-			      		<img src="${currentProfile.image}" class="currentImg">
-						<span class="currentName" style="color: #fff">${currentProfile.name} 님</span>
-					</div>
-					
-					<!-- 드롭다운 메뉴 -->
-				    <div class="Dropdown">
-			      		<div class="dropdownProfile" >  				
-							<!-- 프로필 변경, 프로필 수정 -->
-							<a href="${path}/profile/profile?email=${currentProfile.email}">프로필 변경</a>
-							<a href="${path}/profile/profileEdit?num=${currentProfile.num}">프로필 수정</a>
-			      		</div>
-		      		</div>
+				<div class="profileMenu">
+				    <div class="currentProfile">
+				        <img src="${currentProfile.image}" class="currentImg">
+				        <span class="currentName" style="color: #fff">${currentProfile.name} 님</span>
+				    </div>
+				
+				    <!-- 드롭다운 메뉴 -->
+				    <div class="inner-menu">
+				        <ul>
+				            <li class="inner-menu-item1"><a href="${path}/profile/profile?email=${currentProfile.email}">프로필 변경</a></li>
+				            <li class="inner-menu-item2"><a href="${path}/profile/profileEdit?num=${currentProfile.num}">프로필 수정</a></li>
+				            <li class="inner-menu-item2"><a href="${path}/membership/membership?email=${currentProfile.email}">My Page</a></li>
+				        </ul>
+				    </div>
+				</div>
 	      		</c:if>
+	      		
+	      		<c:if test="${empty currentProfile}">
+	      		<a href="${path}/member/myPage?email=${sessionScope.member.email}">${member.email}님의 마이페이지</a>
+	      		</c:if>
+	      		
       		</div>
+      		
       		<a href="#" onclick="logout(); return false;">로그아웃</a>
+      		
       	</c:when>
-      		<c:otherwise>
-			      <a href="${path}/member/login">로그인</a>
-			      <a href="${path}/member/myPage?email=${sessionScope.member.email}">${member.email}님의 마이페이지</a> <!-- 세부메뉴 -->
-      		</c:otherwise>
-      </c:choose>
+      
+      <c:otherwise>
+        <a href="${path}/member/login">로그인</a>
+        <a href="${path}/member/join">회원가입</a>
+      </c:otherwise>
+    </c:choose>
   </nav>
 </header>
 
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
-var confirm = function(msg, title) {
+var confirmLogout = function(msg, title) {
     Swal.fire({
         title: title,
         text: msg,
@@ -153,6 +110,82 @@ var confirm = function(msg, title) {
 }
 
 function logout() {
-    confirm('정말 로그아웃 하시겠습니까?', '로그아웃 확인');
+	confirmLogout('정말 로그아웃 하시겠습니까?', '로그아웃 확인');
 }
+
+	$(document).ready(function() {
+		/* 세션 정보 확인 */
+		var isLogin = ${sessionScope.member != null};
+		
+		/* SweetAlert2 함수 */
+		function showAlert(icon, title, text) {
+	    	Swal.fire({
+	    		icon : icon,
+	    		title : title,
+	    		text : text,
+	    		confirmButtonText: '확인',
+                confirmButtonColor: '#FFA200'
+	    	});
+	    }
+		
+		/* 드라마 링크 */
+		$(".dramaLink").on("click", function(e) {
+			e.preventDefault();
+			if (!isLogin) {
+				showAlert('error', '로그인 필요', '컨텐츠를 이용하시려면 로그인이 필요합니다.');
+	        } else {
+	            window.location.href = "#"; // 드라마 페이지로 이동
+	        }
+		});
+		
+		/* 영화 링크 */
+		$(".movieLink").on("click", function(e) {
+			e.preventDefault();
+			if (!isLogin) {
+				showAlert('error', '로그인 필요', '컨텐츠를 이용하시려면 로그인이 필요합니다.');
+	        } else {
+	            window.location.href = "${path}/contents/movies/movies"; // 드라마 페이지로 이동
+	        }
+		});
+		
+		/* 예능 링크 */
+		$(".varietyLink").on("click", function(e) {
+			e.preventDefault();
+			if (!isLogin) {
+				showAlert('error', '로그인 필요', '컨텐츠를 이용하시려면 로그인이 필요합니다.');
+	        } else {
+	            window.location.href = "#"; // 드라마 페이지로 이동
+	        }
+		});
+		
+		/* 다큐멘터리 링크 */
+		$(".docuLink").on("click", function(e) {
+			e.preventDefault();
+			if (!isLogin) {
+				showAlert('error', '로그인 필요', '컨텐츠를 이용하시려면 로그인이 필요합니다.');
+	        } else {
+	            window.location.href = "#"; // 드라마 페이지로 이동
+	        }
+		});
+		
+		/* 커뮤니티 링크 */
+		$(".commuLink").on("click", function(e) {
+			e.preventDefault();
+			if (!isLogin) {
+				showAlert('error', '로그인 필요', '컨텐츠를 이용하시려면 로그인이 필요합니다.');
+	        } else {
+	            window.location.href = "${path}/board/board_list"; // 드라마 페이지로 이동
+	        }
+		});
+		
+		/* 검색 링크 */
+		$(".searchLink").on("click", function(e) {
+			e.preventDefault();
+			if (!isLogin) {
+				showAlert('error', '로그인 필요', '컨텐츠를 이용하시려면 로그인이 필요합니다.');
+	        } else {
+	            window.location.href = "${path}/search/search_main"; // 드라마 페이지로 이동
+	        }
+		});
+	});
 </script>

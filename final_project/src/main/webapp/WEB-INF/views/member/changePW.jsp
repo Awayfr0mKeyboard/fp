@@ -21,7 +21,7 @@
     <nav class="sideMenu">
         <ul>
             <li><a href="${path}/home">VIVIVIEW로 돌아가기</a></li>
-            <li><a href="${path}/member/membership?email=${sessionScope.member.email}">멤버십</a></li>
+            <li><a href="${path}/membership/membership?email=${sessionScope.member.email}">멤버십</a></li>
             <li><a href="${path}/member/beforeMyPage?email=${sessionScope.member.email}">개인정보 수정</a></li>
             <li><a href="${path}/member/changePW?email=${sessionScope.member.email}">비밀번호 변경</a></li>
             <li><a href="${path}/member/beforeWithdraw?email=${sessionScope.member.email}">회원 탈퇴</a></li>
@@ -30,7 +30,7 @@
     
     <!-- 이거 table 써서 삐꾸난거 같으니까 내일 table 빼고 다른걸로 수정 -->
 	
-	<form action="" method="POST">
+	<form action="changePW" method="POST">
 		<div class="wrapper">
 			<div class="upperBox">
 				<p class="title">비밀번호 변경</p>
@@ -49,20 +49,22 @@
 					<td>현재 비밀번호</td>
 					<td>
 						<input type="password" name="current" id="currentPW" required />
+						<input type="hidden" id="sessionPW" value="${sessionScope.member.pass}" />
+						<p class="msgBoxFirst"></p>
 					</td>
 				</tr>
 				<tr>
 					<td>새 비밀번호</td>
 					<td>
 						<input type="password" name="newPW" id="newPW" required />
-						<p class="pwMessage">영문/숫자/특수문자를 조합하여 10~16자 이내로 입력해주세요.</p>
+						<p class="msgBoxSecond"></p>
 					</td>
 				</tr>
 				<tr>
 					<td>새 비밀번호 확인</td>
 					<td>
 						<input type="password" name="checkPW" id="checkPW" required />
-						<p class="checkPWMessage">비밀번호를 다시 한 번 입력해주세요.</p>
+						<p class="msgBoxThird"></p>
 					</td>
 				</tr>
 			</table>
@@ -88,56 +90,80 @@
 
 <script>
 	
-	// 새로 입력 버튼 (작성 내용 초기화)
 	$(document).ready(function() {
+		var sessionPW = $("#sessionPW").val();	// 세션에 저장된 사용자 비밀번호
+		var currentPW = $("#currentPW");	// 현재 비밀번호 입력값
+		var newPW = $("#newPW");			// 새 비밀번호 입력값
+		var checkPW = $("#checkPW");		// 새 비밀번호 확인 입력값
+		var msgBoxFirst = $(".msgBoxFirst");	// 첫 번째 칸 메세지 박스
+		var msgBoxSecond = $(".msgBoxSecond");	// 두 번째 칸 메세지 박스
+		var msgBoxThird = $(".msgBoxThird");	// 세 번째 칸 메세지 박스
+		
+		/* 새로 입력 버튼 (작성 내용 초기화) */
 		$("#remove").click(function () {
-	        $("#currentPW").val("");
-	        $("#newPW").val("");
-	        $("#checkPW").val("");
-	        $(".pwMessage").text("영문/숫자/특수문자를 조합하여 10~16자 이내로 입력해주세요.");
-	        $(".pwMessage").css("color", "");
-	        $(".checkPwMessage").text("비밀번호를 다시 한 번 입력해주세요.");
-	        $(".checkPwMessage").css("color", "");
+	        currentPW.val("");
+	        newPW.val("");
+	        checkPW.val("");
+	        msgBoxFirst.text("");
+	        msgBoxFirst.css("color", "");
+	        msgBoxSecond.text("");
+	        msgBoxSecond.css("color", "");
+	        msgBoxThird.text("");
+	        msgBoxThird.css("color", "");
 	    });
+		
+		/* 현재 비밀번호 확인 (currentPW === sessionPW) */
+		currentPW.on("input", function () {
+			if (currentPW.val() === sessionPW) {
+				msgBoxFirst.text("비밀번호가 일치합니다.");
+				msgBoxFirst.css("color", "#FFA200");
+			} else {
+				msgBoxFirst.text("비밀번호가 일치하지 않습니다.");
+				msgBoxFirst.css("color", "#F58");
+			}
+		});
 	
-	// // 새 비밀번호 확인 (currentPW != newPW)
-        $("#newPW").on("input", function () {
-            var currentPW = $("#currentPW").val();
-            var newPW = $("#newPW").val();
-            var message = $(".pwMessage");
-
-            // 비밀번호 길이 검사 : 10~16자
-            var length = /^.{10,16}$/;
-            // 영문, 숫자, 특수문자를 조합하여 10~16자
-	        var criteria = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@$!%*?&]).{10,16}$/;
+	 	/* 새 비밀번호 유효성 검사 (정규식 일치 여부) */
+        newPW.on("input", function () {
+            /* 비밀번호 길이 검사 (8~30자) */
+            var length = /^.{8,30}$/;
+            /* 영문, 숫자 조합 8~30자 */
+	        var criteria = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,30}$/;
+	        
+	        var newPassword = newPW.val();
+	        var currentPassword = currentPW.val();
 
             if (!length.test(newPW)) {
-                message.text("비밀번호는 10~16자까지 입력 가능합니다.");
-                message.css("color", "#f58");
-            } else if (!criteria.test(newPW)) {
-                message.text("영문/숫자/특수문자 중 2가지 이상 조합하셔야 합니다.");
-                message.css("color", "#f58");
-            } else if (newPW === currentPW) {
-                message.text("현재 사용 중인 비밀번호로 변경할 수 없습니다.");
-                message.css("color", "#f58");
+            	// 문자열 길이 확인
+                msgBoxSecond.text("비밀번호는 8~30자까지 입력 가능합니다.");
+                msgBoxSecond.css("color", "#F58");
+            } else if (!criteria.test(newPW.val())) {
+            	// 정규식 확인
+                msgBoxSecond.text("영문, 숫자를 조합하여 입력하셔야 합니다.");
+                msgBoxSecond.css("color", "#F58");
+            } else if (newPassword === currentPassword) {
+            	// 현재 비밀번호와 일치 여부 확인
+                msgBoxSecond.text("현재 사용 중인 비밀번호로 변경할 수 없습니다.");
+                msgBoxSecond.css("color", "#F58");
             } else {
-                message.text("사용 가능한 비밀번호입니다.");
-                message.css("color", "#ffa200");
+            	// 현재 비밀번호와 일치 X, 정규식 일치 O
+                msgBoxSecond.text("사용 가능한 비밀번호입니다.");
+                msgBoxSecond.css("color", "#FFA200");
             }
         });
 	
-	// 새 비밀번호 확인 (newPW == checkPW)
-		$("#checkPW").on("input", function() {
-	        var newPW = $("#newPW").val();
-	        var checkPW = $("#checkPW").val();
-	        var message = $(".checkPWMessage");
-	
-	        if (newPW === checkPW) {
-	            message.text("입력한 비밀번호가 일치합니다.");
-	            message.css("color", "#ffa200");
+		/* 새 비밀번호 확인 (newPW == checkPW) */
+		checkPW.on("input", function() {
+			
+			var newPassword = newPW.val();
+	        var checkPassword = checkPW.val();
+			
+	        if (newPassword === checkPassword) {
+	        	msgBoxThird.text("입력한 비밀번호가 일치합니다.");
+	        	msgBoxThird.css("color", "#FFA200");
 	        } else {
-	            message.text("입력한 비밀번호가 서로 일치하지 않습니다.");
-	            message.css("color", "#f58");
+	        	msgBoxThird.text("입력한 비밀번호가 서로 일치하지 않습니다.");
+	        	msgBoxThird.css("color", "#F58");
 	        }
 	    });
 	});

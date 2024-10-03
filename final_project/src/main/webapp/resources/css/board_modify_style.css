@@ -1,6 +1,11 @@
 /* 게시글 수정 스타일 */
 
 /* 전체 배경 색상 */
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+
 body {
     background-color: #000000;
     font-family: Arial, sans-serif;

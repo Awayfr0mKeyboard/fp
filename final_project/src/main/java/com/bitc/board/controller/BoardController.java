@@ -1,6 +1,7 @@
 package com.bitc.board.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,7 @@ import com.bitc.board.service.BoardService;
 import com.bitc.board.vo.BoardVO;
 import com.bitc.common.util.Criteria;
 import com.bitc.common.util.PageMaker;
+import com.bitc.common.util.SearchCriteria;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,18 +29,14 @@ public class BoardController {
 
 	// 게시판 목록
 	@GetMapping("board_list")
-	public void board_list(Criteria cri, Model model, HttpSession session) throws Exception {
-		List<BoardVO> list = bs.listCriteria(cri);
-		PageMaker pm = bs.getPageMaker(cri);
-		model.addAttribute("list", list);
-		model.addAttribute("pm", pm);
-		String msg = (String) session.getAttribute("msg");
-		if (msg != null) {
-			model.addAttribute("msg", msg);
-			session.removeAttribute("msg");
-		}
+	public String list(SearchCriteria cri, Model model) throws Exception{
+		// Criteria 요청 페이지 번호, 출력 게시물 개수, 검색 시작 인덱스 번호
+		Map<String, Object> map = bs.list(cri);
+		// model.addAttribute("list", map.get("list"));
+		model.addAllAttributes(map);
+		return "board/board_list";
 	}
-
+	
 	// 게시판 상세보기
 	@GetMapping("board_detail")
 	public void board_detail(int b_num, Model model) throws Exception {
@@ -48,7 +46,7 @@ public class BoardController {
 
 	// 조회수 증가
 	@GetMapping("detail")
-	public String detail(int b_num, RedirectAttributes rttr) throws Exception {
+	public String detail_cnt(int b_num, RedirectAttributes rttr) throws Exception {
 		bs.updateCnt(b_num);
 		rttr.addAttribute("b_num", b_num);
 		return "redirect:/board/board_detail";
@@ -90,16 +88,15 @@ public class BoardController {
 		String msg = bs.remove(b_num);
 		rttr.addFlashAttribute("msg", msg);
 		return "redirect:/board/board_list";
-
 	}
-
-	/*
-	 * // 게시글 검색
-	 * 
-	 * @GetMapping("boardSearch") public String boardSearch(HttpServletRequest
-	 * request) throws Exception { ArrayList<BoardVO> noticeList =
-	 * bs.search(request); request.setAttribute("noticeList", noticeList); return
-	 * "redirect:/board/board_list"; }
-	 */
+	
 
 } // end BoardController class
+
+
+
+
+
+
+
+

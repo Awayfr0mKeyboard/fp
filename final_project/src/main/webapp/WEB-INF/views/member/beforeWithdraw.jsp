@@ -22,7 +22,7 @@
     <nav class="sideMenu">
         <ul>
             <li><a href="${path}/home">VIVIVIEW로 돌아가기</a></li>
-            <li><a href="${path}/member/membership?email=${sessionScope.member.email}">멤버십</a></li>
+            <li><a href="${path}/membership/membership?email=${sessionScope.member.email}">멤버십</a></li>
             <li><a href="${path}/member/beforeMyPage?email=${sessionScope.member.email}">개인정보 수정</a></li>
             <li><a href="${path}/member/changePW?email=${sessionScope.member.email}">비밀번호 변경</a></li>
             <li><a href="${path}/member/beforeWithdraw?email=${sessionScope.member.email}">회원 탈퇴</a></li>
@@ -30,7 +30,7 @@
     </nav>
 
     <!-- 회원탈퇴 진행 전 비밀번호 확인 -->
-	<form action="withdraw.sh" method="POST">
+	<form action="beforeWithdraw" method="POST">
 		<div class="wrapper">
 			<div class="upperBox">
 				<p class="title">회원 탈퇴</p>
@@ -51,6 +51,25 @@
 		</div>
 	</form>
 </section>
+
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+	$(document).ready(function () {
+		var msg = "${failMessage}";
+		
+		if (msg) {
+		    Swal.fire({
+		        icon: 'error',
+		        title: '알림',
+		        text: msg,
+		        confirmButtonColor: '#FFA200'
+		    });
+		}
+	});
+</script>
 
 </body>
 </html>

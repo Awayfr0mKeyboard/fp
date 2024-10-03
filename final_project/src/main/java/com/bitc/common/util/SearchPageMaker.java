@@ -1,23 +1,22 @@
 package com.bitc.common.util;
 
-public class SearchPageMaker extends PageMaker {
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
-	public SearchCriteria getSearchCriteria() {
-		if (this.getCri() instanceof SearchCriteria) {
-			return (SearchCriteria) getCri();
-		}
-		return null;
-	}
+public class SearchPageMaker extends PageMaker{
 
 	@Override
 	public String makeQuery(int page) {
-		String queryString = super.makeQuery(page);
-		// ?page=1&perPageNum=20
-		if (getSearchCriteria() != null) {
-			queryString += "&searchName=" + getSearchCriteria().getSearchName();
-			queryString += "&searchValue=" + getSearchCriteria().getSearchValue();
-		}
-		return queryString;
+		SearchCriteria searchCri = (SearchCriteria)cri;
+		UriComponents uri = UriComponentsBuilder.newInstance()
+							.queryParam("page", page)
+							.queryParam("perPageNum", searchCri.getPerPageNum())
+							.queryParam("searchType", searchCri.getSearchType())
+							.queryParam("keyword", searchCri.getKeyword())
+							.build();
+		return uri.toUriString();
 	}
+	
+	
 
-} // end SearchPageMaker class
+}

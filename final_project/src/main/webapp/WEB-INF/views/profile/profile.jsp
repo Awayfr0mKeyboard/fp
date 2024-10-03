@@ -22,41 +22,45 @@
     		<p class="caution">시청할 프로필을 선택해주세요.</p>
     	</div>
     	<hr/>
+
+    	<c:set var="maxProfiles" value="4"/> <!-- 기본 최대 프로필 개수 -->
+    	<c:if test="${member.membershipStatus == '만료'}">
+    	    <c:set var="maxProfiles" value="1"/>
+    	</c:if>
+    	<c:if test="${member.membershipStatus == '갱신' && member.membershipType == '광고형 스탠다드' || member.membershipType == '스탠다드'}">
+    	    <c:set var="maxProfiles" value="2"/>
+    	</c:if>
+
     	<div class="profileList">
 	    	<!-- 프로필 목록 표시 -->
-	    	<c:forEach var="profile" items="${profiles}">
-	    		<c:if test="${profiles != null}">
-					<div class="profiles">
-						<input type="hidden" class="num" value="${profile.num}" >
-				    	<!-- 프로필 이미지 칸 -->
-				    	<div class="profileCard">
-				    		<img src="${profile.image}" alt="Profile Image">
-				    	</div>
-			            <!-- 프로필 이름 및 보안 정보 -->
-			            <div class="profileInfo">
-			          	<!-- 프로필 이름칸 -->
-			              	<p class="profileName">${profile.name}</p>
-				            <c:choose>
-				            	<c:when test="${!empty profile.pass}">
-						            <div class="secure">
-						            	<input type="hidden" class="pass" value="${profile.pass}">
-						            	<p><i class='bx bxs-lock-alt'></i></p>
-						            </div>
-					            </c:when>
-					            <c:otherwise>
-					            	<!-- 비밀번호 없으면 표시 안함 -->
-					            </c:otherwise>
-				            </c:choose>
+	    	<c:if test="${profiles != null && !profiles.isEmpty()}">
+			    <c:forEach var="profile" items="${profiles}">
+			        <div class="profiles">
+			            <input type="hidden" class="num" value="${profile.num}">
+			            <div class="profileCard">
+			                <img src="${profile.image}" alt="Profile Image">
 			            </div>
-				    </div>
-		    	</c:if>
-	    	</c:forEach>
+			            <div class="profileInfo">
+			                <p class="profileName">${profile.name}</p>
+			                <c:choose>
+			                    <c:when test="${!empty profile.pass}">
+			                        <div class="secure">
+			                            <input type="hidden" class="pass" value="${profile.pass}">
+			                            <p><i class='bx bxs-lock-alt'></i></p>
+			                        </div>
+			                    </c:when>
+			                    <c:otherwise>
+			                        <!-- 비밀번호 없으면 표시 안함 -->
+			                    </c:otherwise>
+			                </c:choose>
+			            </div>
+			        </div>
+			    </c:forEach>
+			</c:if>
 	    	
 	    	<!-- 생성 조건부 -->
-	    	<!-- 이 div가 눌리면 모달창이 열리게 -->
-	    	<!-- 프로필이 4개 이상이면 사라짐 -->
 	    	<c:choose>
-		    	<c:when test="${fn:length(profiles) < 4}">
+		    	<c:when test="${fn:length(profiles) < maxProfiles}">
 			    	<div class="createProfile">
 		            	<div class="profileCard">
 		            		<img src="${path}/resources/img/profile/profileAdd.png">
@@ -67,7 +71,7 @@
 		            </div>
 	            </c:when>
 	            <c:otherwise>
-	            	<!-- 프로필이 4개 이상일 때는 생성 버튼 숨김 -->
+	            	<!-- 프로필이 최대 개수 이상일 때는 생성 버튼 숨김 -->
 	            </c:otherwise>
             </c:choose>
     	</div>
@@ -195,11 +199,23 @@
 			                console.log(response);
 			                window.location.href = '${path}/home';  // 홈 페이지로 리다이렉트
 			            } else {
-			                alert("프로필 선택에 실패했습니다.");
+			            	Swal.fire({
+								icon : 'error',
+								title : '프로필 선택 실패',
+								text : '',
+								confirmButtonText : '확인',
+								confirmButtonColor: '#FFA200'
+							});
 			            }
 			        },
 			        error: function() {
-			            alert("서버와의 통신 중 오류가 발생했습니다.");
+			        	Swal.fire({
+							icon : 'error',
+							title : '서버 오류',
+							text : '',
+							confirmButtonText : '확인',
+							confirmButtonColor: '#FFA200'
+						});
 			        }
 			    });
 		    }

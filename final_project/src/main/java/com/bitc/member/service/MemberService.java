@@ -34,4 +34,30 @@ public interface MemberService {
 	 */
 	void logOut(HttpServletRequest request, HttpServletResponse response);
 
+	/**
+	 * @param email - 회원 탈퇴를 위헤 세션에서 가져온 이메일 정보
+	 */
+	void withdraw(String email);
+
+	/**
+	 * @implNote - 변경할 비밀번호
+	 */
+	boolean changePW(String pass, String email);
+	
+	/**
+	 * @implNote - 존재하는 회원이면 비밀번호 재설정
+	 * @param member - 존재하는 회원 email 
+	 * @return - 존재 여부 : true = 존재 , false = 없음
+	 */
+	boolean find(MemberVO member);
+
+	/**
+	 * @implNote - 비밀번호 재설정
+	 * @param member - 존재하는 회원 email의 pass 변경
+	 * @return - 변경된 행 여부 : true = 존재 , false = 없음
+	 */
+	boolean resetPW(MemberVO member);
+
+	boolean myPage(MemberVO member);
+
 }

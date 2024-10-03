@@ -1,6 +1,11 @@
 /* 게시판 목록 스타일 */
 
 /* 전체 배경 색상 */
+
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
 body {
     background-color: #000000;
     font-family: Arial, sans-serif;
@@ -116,8 +121,6 @@ body {
 }
 
 .page-item.active .page-link {
-    background-color: #FFA200;
-    color: #ffffff;
     border-radius: 50px;
 }
 

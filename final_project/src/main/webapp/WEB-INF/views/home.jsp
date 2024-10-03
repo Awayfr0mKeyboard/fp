@@ -24,7 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px;
+
 }
 
 .banner h1 {
@@ -41,7 +41,7 @@ body {
   background-color: #ffa200;
   color: #ffffff;
   border: none;
-  padding: 10px 20px;
+  padding: 13px 25px;
   font-size: 1rem;
   cursor: pointer;
   border-radius: 5px;
@@ -62,22 +62,57 @@ body {
 }
 
 .section .movie-list {
-  display: flex;
-  gap: 10px;
-  /* overflow-x: scroll; */
-  padding: 10px 0;
+	display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 60px;
+	padding: 20px;
 }
-
-.section .movie-list img {
-  height: 200px;
-  border-radius: 5px;
-  transition: transform 0.3s;
+.movie-item {
+    position: relative;
+	cursor: pointer;
 }
-
-.section .movie-list img:hover {
-  transform: scale(1.05);
+		
+.movie-item img {
+	width: 100%;
+	height: 100%;
+    border-radius: 10px;
+}
+		      
+.movie-item img:hover {
+	transform: scale(1.05);
+	transition-duration: 0.3s
 }
 	
+.slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.banner-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #e5e5e5;
+}
+
 </style>
 
 	<meta charset="UTF-8">
@@ -93,24 +128,85 @@ body {
 <body>
 
   <!-- 배너 -->
-  <section class="banner" style="background-image: url('${path}/resources/images/home_banner.jpg');">
-  	<br/><br/><br/><br/> <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <h1>최신 영화 바로 시청하기</h1>
-    <p>듄2, 웡카, 분노의 질주:라이드 오어 다이 등 최신 영화를 마음껏 시청할 절호의 기회!</p>
-    <button class="button" onclick="location.href='${path}/main'" >보러가기</button>
-  </section>
+  <section class="banner">
+	    <div class="slider">
+	        <div class="slide" style="background-image: url('${path}/resources/images/banner3.png');"></div>
+	        <div class="slide" style="background-image: url('${path}/resources/images/banner.jpeg');"></div>
+	        <div class="slide" style="background-image: url('${path}/resources/images/banner2.png');"></div>
+	    </div>
+	    <div class="banner-content">
+	    	<br/><br/><br/><br/> <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	        <h1>최신 영화 바로 시청하기</h1>
+	        <p>듄2, 웡카, 매드맥스:퓨리오사 등 최신 영화를 마음껏 시청할 절호의 기회!</p>
+	        <button class="button" onclick="location.href='${path}/contents/movies/movies'" >보러가기</button>
+	    </div>
+	</section>
+	<br/><br/>
 
   <!-- 영화 목록 섹션 -->
   <section class="section">
-    <h2>인기 영화 살펴보기</h2>
-    <div class="movie-list">
-      <img src="movie1.jpg" alt="Movie 1">
-      <img src="movie2.jpg" alt="Movie 2">
-      <img src="movie3.jpg" alt="Movie 3">
-      <img src="movie4.jpg" alt="Movie 4">
-      <img src="movie5.jpg" alt="Movie 5">
+    <h2>인기 영화 추천</h2>
+    <div class="movie-list"> 
+	         
+	            <c:forEach var="movie" items="${randomMovies}">
+	            <div class="movies">
+	                <div class="movie-item"> 
+	                    <a href="${path}/contents/movies/movies_detail?mv_num=${movie.mv_num}">
+	                    <img src="${movie.poster_url}" alt="${movie.title}"/>
+	                    </a>
+	                </div>
+	            </div>
+	            </c:forEach>  
     </div>
   </section>
+  
+  <!-- 영화 목록 섹션 -->
+  <section class="section">
+    <h2>최신 영화 살펴보기</h2>
+    <div class="movie-list"> 
+	         
+	            <c:forEach var="movie" items="${recentMovies}">
+	            <div class="movies">
+	                <div class="movie-item"> 
+	                    <a href="${path}/contents/movies/movies_detail?mv_num=${movie.mv_num}">
+	                    <img src="${movie.poster_url}" alt="${movie.title}"/>
+	                    </a>
+	                </div>
+	            </div>
+	            </c:forEach>  
+    </div>
+  </section>
+  <br/><br/><br/>
+  
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+    }
+
+    // 3초 간격으로 슬라이드 전환
+    setInterval(nextSlide, 3000);
+    
+    // 초기화
+    showSlide(currentSlide);
+    
+</script>
+  
+  
+  
 </body>
 
 <%@ include file="common/footer.jsp" %>

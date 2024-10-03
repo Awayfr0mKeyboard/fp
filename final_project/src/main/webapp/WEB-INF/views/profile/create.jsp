@@ -96,14 +96,12 @@
 		
 		// 프로필 생성 버튼 클릭 시 AJAX 요청
 		$(".createProfileBtn").on("click", function (e) {
-			
 			e.preventDefault();
 			
 			var name = $("#name").val();
 		    var image = $("#image").val();
 		    var pass = $("#pass").val();
 
-			console.log("Create Profile Button Clicked");
 		    $.ajax({
 		        url: '${path}/profile/create',
 		        type: 'POST',

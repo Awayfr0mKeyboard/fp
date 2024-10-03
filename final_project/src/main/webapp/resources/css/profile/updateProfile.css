@@ -77,8 +77,7 @@
 	width: 120px;
     height: 40px;
     font-size: 20px;
-    font-weight: 600;
-    color: #e5e5e5;
+    color: #fff;
     background: #f58;
     border: none;
     outline: none;
@@ -143,7 +142,10 @@
 	height: 41px;
 	padding-left: 10px;
 	border-radius: 5px;
-	font-size: 20px;
+	border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
 }
 
 /* 프로필 비밀번호 */
@@ -167,7 +169,10 @@
 	height: 41px;
 	padding-left: 10px;
 	border-radius: 5px;
-	font-size: 20px;
+	border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
 }
 
 /* Footer */
@@ -185,8 +190,7 @@
 	width: 150px;
     height: 40px;
     font-size: 24px;
-    font-weight: 600;
-    color: #e5e5e5;
+    color: #fff;
     background: #ffa200;
     border: none;
     outline: none;

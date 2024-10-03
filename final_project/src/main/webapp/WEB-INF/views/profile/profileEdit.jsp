@@ -26,7 +26,7 @@
     	<hr/>
         <div class="subject">프로필</div>
         <div class="profile">
-            <div class="profileSection">
+            <div class="profileSection" style="cursor: pointer;">
                 <div class="icon"><i class='bx bxs-user'></i></div>
                 <div class="profileContent profileUpdate">
                     <p class="title">프로필 변경</p>
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <hr/>
-            <div class="profileSection profileDelete">
+            <div class="profileSection profileDelete" style="cursor: pointer;">
                 <div class="icon"><i class='bx bxs-trash'></i></div>
                 <div class="profileContent">
                     <p class="title">프로필 삭제</p>
@@ -58,7 +58,8 @@
         			<div class="icon"><i class='bx bx-credit-card'></i></div>
         			<div class="membershipContent">
         				<p class="title">멤버십</p>
-        				<p class="sub">현재 결제한 멤버십 정보 (멤버십 등급 / 날짜)</p>
+        				<p class="sub">${member.membershipType}</p>
+        				<p class="sub">${member.paymentDate} ~ ${member.expiryDate}</p>
         			</div>
         		</div>
         		<hr/>
@@ -66,7 +67,7 @@
         			<div class="icon"><i class='bx bxs-offer'></i></div>
         			<div class="membershipContent">
         				<p class="title">포인트</p>
-        				<p class="sub">현재 포인트</p>
+        				<p class="sub">${member.point}</p>
         			</div>
         		</div>
         	</div>

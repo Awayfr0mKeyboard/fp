@@ -1,100 +1,127 @@
-body *:not(header):not(footer) {
+.wrapper * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+.wrapper {
+    width: 600px;
+    margin-top: 20px;
+}
+
+section {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
 }
 
 body {
     background: #000000;
 }
 
-.subject {
-    font-size: 30px;
-    font-weight: 600;
-    background: #000000;
-    color: #e5e5e5;
-    margin: auto;
-    margin-bottom: 50px;
-    width: 510px;
-    border: 1px solid rgba(0, 0, 0, .2);
+.upperBox {
+    height: 110px;
 }
 
-.wrapper {
-    padding: 100px 150px;
-    /* 이건 나중에 보고 너비 설정 다시 하기 */
-    width: 1000px;
-    margin: auto;
+.upperBox .title {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.upperBox .caution {
+    color: gray;
+}
+
+.lowerBox {
+    height: auto;
+}
+
+.inner1 {
+    margin-top: 20px;
+    height: auto;
     margin-bottom: 20px;
-    /* 이건 나중에 삭제해도 될듯?*/
-    border: 1px solid rgba(0, 0, 0, .2); 
 }
 
-.innerWrapper {
-    background: #000000;
-    color: #e5e5e5;
-    width: 510px;
-    margin: auto;
+.inner1 p {
+    text-align: center;
 }
 
-.innerWrapper .selectEmail, .innerWrapper .selectPhone {
-    border: 1px solid rgba(221, 221, 221, 0.2);
-    margin: 15px 0 0 0;
-    height: 50px;
-    font-size: 21px;
-    padding-left: 20px;
-    padding-top: 10px;
-    font-weight: 600;
-    cursor: pointer;
+.inner1 p span {
+    font-weight: 900;
+    color: #ffa200;
 }
 
-.infoBox {
-    padding: 30px 30px 30px 30px;
-    display: none;
-    background: #000000;
+.inner2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.infoBox #phone, .infoBox #email {
-    width: 284px;
+.inner2 > input[type="email"] {
+    flex: 1;
     height: 40px;
-    margin-bottom: 15px;
-    padding-left: 15px;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding-left: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
 }
 
-.code {
+.inner3 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.inner3 > .code {
+    flex: 1;
     height: 40px;
-    width: 100%;
-    margin-bottom: 15px;
-    padding-left: 15px;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding-left: 10px;
+    font-size: 20px;
+    color: #000000;
 }
 
-.infoBox .send {
+.inner3 > .send {
     width: 150px;
     height: 40px;
-    background: #f58;
+    font-size: 24px;
+    color: white;
+    background: #FFA200;
     border: none;
     outline: none;
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     cursor: pointer;
-    text-align: center;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 600;
-    vertical-align: middle;
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
-.infoBox .btn {
-    width: 100%;
+.buttonBox {
+	display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.buttonBox .btn {
+	width: 150px;
     height: 40px;
+    font-size: 24px;
+    color: white;
+    background: gray;
     border: none;
     outline: none;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 600;
-    background: #ffa200;
+    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
-    border-radius: 20px;
-    cursor: pointer;
+    cursor: not-allowed;
+    
+}
+
+.send:hover, .btn:hover {
+	background-color: #ffbe4d;
 }

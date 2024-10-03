@@ -37,7 +37,7 @@ body {
 
 .movie-item img {
     width: 100%;
-    height: auto;
+    height: 100%;
     border-radius: 10px;
 }
 
@@ -112,6 +112,12 @@ body {
     margin-left: 10px;
     cursor: pointer;
 }
+
+.movie-item img:hover {
+	transform: scale(1.05);
+	transition-duration: 0.3s
+}
+
 </style>
 
 
@@ -123,9 +129,9 @@ body {
     <div class="search-container">
         <!-- 검색창과 버튼을 포함하는 박스 -->
         <div class="search-box-container">
-            <form>
+            <form action="${path}/contents/movies/search_movie" method="get">
             <div class="search-box">
-                <input type="text" placeholder="제목, 인물명을 입력해보세요." class="search-input">
+                <input type="text" name="keyword" placeholder="제목, 인물명을 입력해보세요." class="search-input">
                 <button type=submit class="search-button"><i class='bx bx-search'></i></button>
             </div>
             </form>
@@ -133,44 +139,54 @@ body {
     </div>
 
     <div class="movie-grid">
-        <div class="movie-item">
-            <a href="${path}/contents/movies/movies_detail"> <img src="${path}/resources/images/movie1.jpg" alt="Movie 1"> </a>
-            <!-- <div class="label new">NEW</div> -->
-        </div>
-        <div class="movie-item">
-            <a href="${path}/contents/movies/movies_detail"> <img src="${path}/resources/images/movie1.jpg" alt="Movie 2"> </a>
-            <!-- <div class="label age">19</div> -->
-        </div>
-        <div class="movie-item">
-           <a href="${path}/contents/movies/movies_detail"> <img src="${path}/resources/images/movie1.jpg" alt="Movie 3"> </a>
-           <!--  <div class="label new">NEW</div> -->
-            <!-- <div class="label age">19</div> -->
-        </div>
-        <div class="movie-item">
-            <img src="${path}/resources/images/movie1.jpg" alt="Movie 4">
-        </div>
-                <div class="movie-item">
-            <img src="${path}/resources/images/movie1.jpg" alt="Movie 5">
-        </div>
-                <div class="movie-item">
-            <img src="${path}/resources/images/movie1.jpg" alt="Movie 6">
-        </div>
-                <div class="movie-item">
-            <img src="${path}/resources/images/movie1.jpg" alt="Movie 7">
-        </div>
-        <div class="movie-item">
-            <img src="${path}/resources/images/movie1.jpg" alt="Movie 8">
-        </div>
-        <div class="movie-item">
-            <img src="${path}/resources/images/movie1.jpg" alt="Movie 9">
-        </div>
-        <div class="movie-item">
-            <img src="${path}/resources/images/movie1.jpg" alt="Movie 10">
-        </div>
+    
+    
+<c:choose>
+
+    <c:when test="${empty searchMovies}">
+        <c:forEach var="movie" items="${movies}">
+            <div class="movie-item">
+                <a href="${path}/contents/movies/movies_detail?mv_num=${movie.mv_num}">
+                    <img src="${movie.poster_url}" alt="${movie.title}"/>
+                </a>
+            </div>
+        </c:forEach>
+    </c:when>
+
+
+    <c:otherwise>
+        <c:forEach var="movie" items="${searchMovies}">
+            <div class="movie-item">
+                <a href="${path}/contents/movies/movies_detail?mv_num=${movie.mv_num}">
+                    <img src="${movie.poster_url}" alt="${movie.title}"/>
+                </a>
+            </div>
+        </c:forEach>
+    </c:otherwise>
+</c:choose>
+
 
 
     </div>
+    
+    
+    <script>
+	    window.onload = function() {
+	        // 메시지가 존재하면 SweetAlert 창 띄우기
+	        var noSearch = "${noSearch}";
+	        if (noSearch) {
+	            Swal.fire({
+	                title: '알림',
+	                text: noSearch,
+	                icon: 'warning',
+	                confirmButtonColor: '#FFA200',
+	            });
+	        }
+	    }
+	</script>
+    
+    
 </body>
 </html>
 
-<%@ include file="../../common/footer.jsp" %>
+<%@ include file="../../common/footer.jsp" %> 

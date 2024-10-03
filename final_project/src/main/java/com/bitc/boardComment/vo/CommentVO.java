@@ -23,8 +23,10 @@ public class CommentVO {
 	private int bc_num;
 	private int b_num;
 	private String email;
+	private String name;
 	private String c_content;
 	private Date c_regdate;
 	private Date c_updatedate;
+	private int p_num;
 
 } // end CommentVO class

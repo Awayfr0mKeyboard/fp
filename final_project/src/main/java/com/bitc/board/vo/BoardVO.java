@@ -11,7 +11,9 @@ public class BoardVO {
 	private String b_title;
 	private String b_content;
 	private String email;
+	private String name;
 	private Date b_regdate;
 	private int b_viewcnt;
+	private int p_num;
 
 } // end BoardVO class

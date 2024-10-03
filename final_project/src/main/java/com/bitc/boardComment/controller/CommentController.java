@@ -47,8 +47,6 @@ public class CommentController {
 
 	@GetMapping("/all/{b_num}")
 	public ResponseEntity<List<CommentVO>> list(@PathVariable(name = "b_num") int b_num) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("Content-Type", "text/plain;charset=utf-8");
 
 		ResponseEntity<List<CommentVO>> entity = null;
 
@@ -68,16 +66,16 @@ public class CommentController {
 	@PutMapping("/{cno}")
 	public ResponseEntity<String> update(@PathVariable int cno, @RequestBody CommentVO vo) {
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("Content-Type", "text/plain;charset=utf-8");
+		headers.set("Content-Type", "application/json;charset=utf-8");
 
 		ResponseEntity<String> entity = null;
 		vo.setBc_num(cno);
 
 		try {
 			String result = cs.updateComment(vo); // 댓글 수정 요청
-			entity = new ResponseEntity<>(result, HttpStatus.OK);
+			entity = new ResponseEntity<>(result, headers, HttpStatus.OK);
 		} catch (Exception e) {
-			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<>(e.getMessage(), headers, HttpStatus.BAD_REQUEST);
 		}
 
 		return entity;
@@ -88,14 +86,16 @@ public class CommentController {
 	 */
 	@DeleteMapping("/{cno}")
 	public ResponseEntity<String> delete(@PathVariable(name = "cno") int bc_num) {
-
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Content-Type", "text/plain;charset=utf-8");
+		
 		ResponseEntity<String> entity = null;
 
 		try {
 			String result = cs.deleteComment(bc_num);
-			entity = new ResponseEntity<>(result, HttpStatus.OK);
+			entity = new ResponseEntity<>(result, headers, HttpStatus.OK);
 		} catch (Exception e) {
-			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<>(e.getMessage(), headers, HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>VIVIVIEW - 마이 페이지</title>
+<title>VIVIVIEW MYPAGE</title>
 
 <!-- 네비게이션 바 CSS -->
 <link rel="stylesheet" href="${path}/resources/css/member/sideMenu.css">
@@ -21,7 +21,7 @@
 	<nav class="sideMenu">
 		<ul>
 			<li><a href="${path}/home">VIVIVIEW로 돌아가기</a></li>
-			<li><a href="${path}/member/membership?email=${sessionScope.member.email}">멤버십</a></li>
+			<li><a href="${path}/membership/membership?email=${sessionScope.member.email}">멤버십</a></li>
 			<li><a href="${path}/member/beforeMyPage?email=${sessionScope.member.email}">개인정보 수정</a></li>
 			<li><a href="${path}/member/changePW?email=${sessionScope.member.email}">비밀번호 변경</a></li>
 			<li><a href="${path}/member/beforeWithdraw?email=${sessionScope.member.email}">회원 탈퇴</a></li>
@@ -29,7 +29,7 @@
 	</nav>
 	
     <!-- 개인정보 수정 전 비밀번호 확인 -->
-	<form action="" method="POST">
+	<form action="${path}/member/beforeMyPage" method="POST">
 		<div class="wrapper">
 			<div class="upperBox">
 				<p class="title">개인정보 수정</p>
@@ -43,13 +43,34 @@
 				</div>
 				<div class="inner2">
 					<p>비밀번호 확인</p>
-					<input type="password" name="password" required>
+					<input type="password" name="pass" required>
 					<input type="submit" value="확인">
 				</div>
 			</div>
 		</div>
 	</form>
 </section>
+
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+	$(document).ready(function () {
+		var msg = "${msg}";
+		
+		if (msg) {
+		    Swal.fire({
+		        icon: 'error',
+		        title: '알림',
+		        text: msg,
+		        confirmButtonColor: '#FFA200'
+		    });
+		}
+	});
+</script>
+
 </body>
 </html>
 <%@ include file="../common/footer.jsp" %>

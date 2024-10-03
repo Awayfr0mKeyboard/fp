@@ -5,20 +5,40 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
+import com.bitc.board.provider.BoardQueryProvider;
 import com.bitc.board.vo.BoardVO;
 import com.bitc.common.util.Criteria;
+import com.bitc.common.util.SearchCriteria;
+import com.bitc.common.util.SearchPageMaker;
 
 public interface BoardDAO {
 
+	/**
+	 *  게시글 목록
+	 * @param cri
+	 * @return
+	 */
+	@SelectProvider(type = BoardQueryProvider.class, method="searchSelectSql")
+	List<BoardVO> list(SearchCriteria cri);
+
+	/**
+	 *  게시물 개수
+	 * @param cri
+	 * @return
+	 */
+	@SelectProvider(type = BoardQueryProvider.class, method="searchSelectCount")
+	int totalCount(SearchCriteria cri);
+	
 	/**
 	 * 게시글 작성
 	 * 
 	 * @param BoardVO db에 등록할 게시글 정보
 	 * @return 등록된 게시글 개수를 수로 반환
 	 */
-	@Insert("INSERT INTO board(b_title,b_content,email) VALUES(#{b_title}, #{b_content}, #{email})")
+	@Insert("INSERT INTO board(b_title,b_content,email,name,p_num) VALUES(#{b_title}, #{b_content}, #{email}, #{name}, #{p_num})")
 	int create(BoardVO vo) throws Exception;
 
 	/**
@@ -55,56 +75,13 @@ public interface BoardDAO {
 	 */
 	@Update("UPDATE board SET b_viewcnt = b_viewcnt + 1 WHERE b_num = #{b_num}")
 	void updateCnt(int b_num) throws Exception;
-
-	/**
-	 * 전체 게시글 목록
-	 * 
-	 * @return - 조회된 전체 게시글 목록
-	 */
-	@Select("SELECT * FROM board ORDER BY b_num DESC")
-	List<BoardVO> listAll() throws Exception;
-
-	/**
-	 * 전체 게시물 개수
-	 * 
-	 * @return - 전체 게시글 개수
-	 */
-	@Select("SELECT count(*) FROM board")
-	int totalCount() throws Exception;
-
-	/**
-	 * 페이징 처리된 게시물 목록
-	 * 
-	 * @param cri - 페이징 된 게시글 목록을 조회할 정보
-	 * @return - 조회된 게시글 목록
-	 */
-	@Select("SELECT * FROM board ORDER BY b_num DESC limit #{startRow}, #{perPageNum}")
-	List<BoardVO> listCriteria(Criteria cri) throws Exception;
-
-	/**
-	 * 검색 결과 게시물 개수
-	 * 
-	 * @return - 검색 결과 게시물 개수
-	 * @throws Exception
-	 */
-	/*
-	 * @Select() int SearchListCount(String searchName, String searchValue) throws
-	 * Exception;
-	 */
-
-	/**
-	 * 페이징 처리된 검색 결과 게시물 목록
-	 * 
-	 * @param cri
-	 * @return -
-	 * @throws Exception
-	 */
-	/*
-	 * @Select("SELECT COUNT(*) FROM board" +
-	 * " WHERE (searchName = #{b_title} AND b_title LIKE CONCAT('%', #{searchValue}, '%'))"
-	 * +
-	 * " OR (searchName <> #{b_title} AND `email` LIKE CONCAT('%', #{searchValue}, '%'))"
-	 * ) List<BoardVO> SearchBoardList(PageMaker pageMaker) throws Exception;
-	 */
-
+	  
 } // end BoardDAO interface
+
+
+
+
+
+
+
+

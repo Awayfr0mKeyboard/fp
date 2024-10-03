@@ -19,7 +19,9 @@
 		</div>
 		<div class="col-md-10">
 			<input class="form-control-plaintext input-form" 
-			name="email" type="email" required />
+			name="name" type="text" value="${currentProfile.name}" readonly />
+			<input type="hidden" name="email" value="${currentProfile.email}">
+			<input type="hidden" name="p_num" value="${currentProfile.num}">
 		</div>
 	</div>
 	<div class="row m-5">

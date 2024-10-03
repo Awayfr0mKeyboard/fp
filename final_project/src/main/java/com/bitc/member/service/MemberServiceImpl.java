@@ -59,4 +59,42 @@ public class MemberServiceImpl implements MemberService {
 		response.addCookie(cookie);
 	}
 
+	@Override
+	public void withdraw(String email) {
+		dao.withdraw(email);
+	}
+
+	@Override
+	public boolean changePW(String pass, String email) {
+		// System.err.println("checkPW : " + pass + ", sessionEmail : " + email);
+		// checkPW : b12346578, sessionEmail : apfhd1@naver.com 여기도 값 잘 받음
+		dao.changePW(pass, email);
+		return dao.changePW(pass, email) > 0;
+	}
+
+	@Override
+	public boolean find(MemberVO member) {
+
+		return dao.find(member.getEmail());
+	}
+
+	@Override
+	public boolean resetPW(MemberVO member) {
+		System.out.println("ServiceImpl : " + member.getEmail());
+		System.out.println("ServiceImpl : " + member.getPass());
+		return dao.resetPW(member.getEmail(), member.getPass());
+	}
+
+	@Override
+	public boolean myPage(MemberVO member) {
+		MemberVO currentMember = dao.getMemberByEmail(member.getEmail());
+		
+		// 전화번호가 이미 존재하는 경우
+		if (!currentMember.getPhone().equals(member.getPhone()) && dao.phoneExists(member.getPhone()) > 0) {
+			return false;
+		}
+		// 전화번호가 존재하지 않는 경우
+		return dao.myPage(member);
+	}
+
 }

@@ -67,8 +67,10 @@ body {
     height: 40px;
     margin-right: 10px;
     padding-left: 10px;
-    font-size: 30px;
-    color: #000000;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
 }
 
 .inner2 input[type=submit] {
@@ -83,4 +85,8 @@ body {
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     cursor: pointer;
+}
+
+.inner2 input[type=submit]:hover {
+	background-color: #ffbe4d;
 }

@@ -29,7 +29,7 @@
 	</nav>
 	
 	<!-- 회원 탈퇴 -->
-	<form action="" method="POST">
+	<form action="withdraw" method="POST">
 		<div class="wrapper">
 			<div class="upperBox">
 				<p class="title">회원 탈퇴</p>
@@ -42,7 +42,7 @@
 					<p><span id="word">회원탈퇴</span>를 바르게 입력해주세요.</p>
 				</div>
 				<div class="inner2">
-					<input type="text" name="withdrawWord" id="withdrawWord" required oninput="withdrawWord()">
+					<input type="text" name="withdrawWord" id="withdrawWord" required">
 					<input type="submit" id="submit" value="확인" disabled>
 				</div>
 			</div>
@@ -50,7 +50,10 @@
 	</form>
 </section>
 
+<!-- jQuery -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 	// "회원탈퇴" 문구 똑바로 기입 안하면 버튼 작동 X
@@ -60,11 +63,12 @@
 			var word = $("#word").text().trim();
 			
 			if (input === word) {
+				// 버튼 활성화
 				$("#submit").prop("disabled", false);
-				$("#submit").css("background", "gray");
-			} else {
-				$("#submit").prop("disabled", true);
 				$("#submit").css("background", "#ffa200");
+			} else {
+				// 버튼 비활성화
+				$("#submit").prop("disabled", true);
 			}
 		});
 	});

@@ -8,6 +8,13 @@
 	<link rel="stylesheet" href="${path}/resources/css/board_detail_style.css?after">
 </head>
 
+
+<input type="hidden" id="c_email" value="${sessionScope.currentProfile.email}">
+<input type="hidden" id="c_num" value="${sessionScope.currentProfile.num}">
+
+<input type="hidden" id="b_email" value="${board.email}">
+<input type="hidden" id="p_num" value="${board.p_num}">
+
 <div class="container">
 	<div>
 		<h1 class="commu_title">${board.b_num} 번째 게시글</h1>
@@ -17,7 +24,8 @@
 			<span class="form-control-plaintext">작성자</span>
 		</div>
 		<div class="col-md-10">
-			<span class="form-control-plaintext input-form">${board.email}</span>
+			<span class="form-control-plaintext input-form">${board.name}</span>
+			<input type="hidden" value="${board.email}" >
 		</div>
 	</div>
 	<div class="row m-5">
@@ -40,7 +48,7 @@
 			<a href="${path}/board/board_modify?b_num=${board.b_num}"
 				class="form-control btn btn-warning">수정</a>
 			<a href="#" onclick="deleteNotice('${board.b_num}',event);"
-				class="form-control btn btn-danger">삭제</a>	
+				class="form-control btn btn-danger">삭제</a>
 			<a href="${path}/board/board_list"
 				class="form-control btn btn-primary">목록</a>
 		</div>
@@ -49,14 +57,62 @@
 		</div>
 	</div>
 </div>
+
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
 	function deleteNotice(b_num,event){
 		event.preventDefault();
-		if(confirm(b_num+" 게시물을 삭제하시겠습니까?")){
-			location.href='${path}/board/delete?b_num='+b_num;
+		
+		var c_num = $("#c_num").val(); // 세션에 들어간 프로필 번호
+		var b_number = $("#b_number").val();  // 게시글에 들어간 프로필 번호
+		
+		if(c_num === b_number) {
+			
 		}
-	}
+		
+		Swal.fire({
+			title: '',
+	        text: b_num + "번 게시물을 삭제하시겠습니까?",
+	        icon: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#FFA200',
+	        cancelButtonColor: '#888',
+	        confirmButtonText: '삭제',
+	        cancelButtonText: '취소'
+		}).then((result) => {
+			// console.log(result);
+			if(result.isConfirmed) {
+				location.href='${path}/board/delete?b_num='+b_num;
+			}
+		});
+		
+	} 
 </script>
+
+
+
+<script>
+	$(document).ready(function() {
+		var c_email = $("#c_email").val();		// 세션에 저장된 이메일
+		var b_email = $("#b_email").val();		// 게시글에 저장된 이메일
+		
+		var c_num = $("#c_num").val(); // 세션에 들어간 프로필 번호
+		var p_num = $("#p_num").val();  // 게시글에 들어간 프로필 번호
+		
+		if (c_num === p_num && c_email === b_email) {
+			$(".btn-danger").show();
+			$(".btn-warning").show();
+		} else {
+			$(".btn-danger").hide();
+			$(".btn-warning").hide();
+		}
+	});
+</script>
+
 
 
 

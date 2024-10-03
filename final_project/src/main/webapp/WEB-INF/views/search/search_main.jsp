@@ -10,15 +10,13 @@
 
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>검색창 예제</title>
+    <title>VIVIVIEW SEARCH</title>
 <link rel="stylesheet" href="${path}/resources/css/search_main_style.css">
 
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-    <!-- iconbox 설정 -->
-   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<!-- iconbox 설정 -->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.2/sweetalert2.all.min.js"></script>
 
 <style>
 
@@ -33,6 +31,32 @@ body {
     align-items: center;
     height: 100vh;
 }
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 20px;
+    justify-content: center; 
+    padding: 20px;
+}
+
+.movie-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 300px;
+    margin: 0 auto; 
+    cursor: pointer;
+}
+
+.movie-item img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    object-fit: cover; 
+}
+
 
 .search-container {
     display: flex;
@@ -156,18 +180,23 @@ body {
 </head>
 
 <body>
-    <div class="search-container">
-        <!-- 검색창과 버튼을 포함하는 박스 -->
-        <div class="search-box-container">
-            <form>
-            <div class="search-box">
-                <input type="text" placeholder="제목, 인물명을 입력해보세요." class="search-input">
-                <button type=submit class="search-button"><i class='bx bx-search'></i></button>
-            </div>
-            </form>
-        </div>
+      
+  <div class="search-container">
+    <!-- 검색창과 버튼을 포함하는 박스 -->
+      <div class="search-box-container">
+        <form action="${path}/search/search_result" method="get">
+          <div class="search-box">
+             <input type="text" name="keyword" placeholder="제목, 인물명을 입력해보세요." class="search-input">
+              <button type=submit class="search-button"><i class='bx bx-search'></i></button>
+          </div>
+          </form>
+   		</div>
 
-        <!-- 최근 검색어와 인기 검색어를 포함하는 박스 -->
+
+
+<c:choose>
+
+    <c:when test="${empty searchMovies}">
         <div class="recent-trending-container">
             <div class="recent-search">
                 <h2>최근 검색어</h2>
@@ -178,7 +207,7 @@ body {
                 </div>
             </div>
             <div class="trending-searches">
-            <br/>
+                <br/>
                 <h2>실시간 인기 검색어</h2>
                 <ol>
                     <li>이혼숙려캠프</li>
@@ -195,8 +224,41 @@ body {
                 <p>2024.08.30 오전 00:00 기준</p>
             </div>
         </div>
-    </div>
-</body>
+    </c:when>
 
+    <c:otherwise>
+        <div class="movie-grid">
+            <c:forEach var="movie" items="${searchMovies}">
+                <div class="movie-item">
+                    <a href="${path}/contents/movies/movies_detail?mv_num=${movie.mv_num}">
+                        <img src="${movie.poster_url}" alt="${movie.title}"/>
+                    </a>
+                </div>
+            </c:forEach>
+        </div>
+    </c:otherwise>
+</c:choose>    
+
+</div>
+ 
+ 
+ 	<script>
+	    window.onload = function() {
+	        // 메시지가 존재하면 SweetAlert 창 띄우기
+	        var noSearch = "${noSearch}";
+	        if (noSearch) {
+	            Swal.fire({
+	                title: '알림',
+	                text: noSearch,
+	                icon: 'warning',
+	                confirmButtonColor: '#FFA200',
+	            });
+	        }
+	    }
+	</script>
+ 
+ 
+ 
+</body>
 </html>
 
