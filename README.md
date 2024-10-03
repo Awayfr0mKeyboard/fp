@@ -8,9 +8,9 @@
 
 이름|역할|주요 담당 업무|
 ---|---|---|
-서석희|조장 ⚜|바지, MyPage|
-정승진|조원|CSS, Movies|
-이유리|조원|DB, StoryBoard, 게시판|
+서석희|조장 ⚜|바지, Profile, Membership|
+정승진|조원|CSS, Movies, Member|
+이유리|조원|DB, StoryBoard, Board|
 </div>
 <br/>
 <br/>
