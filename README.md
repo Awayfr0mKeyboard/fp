@@ -8,7 +8,7 @@
 
 이름|역할|주요 담당 업무|
 ---|---|---|
-서석희|조장 ⚜|바지, Profile, Membership|
+서석희|조장 ⚜|Profile, Membership|
 정승진|조원|CSS, Movies, Member|
 이유리|조원|DB, StoryBoard, Board|
 </div>
@@ -53,7 +53,13 @@
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=LeeYuriq&layout=compact)](https://github.com/LeeYuriq/github-readme-stats)
 <br/>
 <br/>
+
 </div>
 
-## ⭐ 진행 현황
+## ⭐ ER diagram
+<div align=center>
+  
+![E-R](https://github.com/user-attachments/assets/f13019ff-98ee-44f6-a568-2445ac90374c)
+
+</div>
 
