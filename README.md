@@ -55,11 +55,3 @@
 <br/>
 
 </div>
-
-## ⭐ ER diagram
-<div align=center>
-  
-![E-R](https://github.com/user-attachments/assets/f13019ff-98ee-44f6-a568-2445ac90374c)
-
-</div>
-
