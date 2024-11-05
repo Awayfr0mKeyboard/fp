@@ -55,3 +55,10 @@
 <br/>
 
 </div>
+
+## 👀 시연 영상 링크
+<div align=center>
+
+https://youtu.be/HhdDndL1z3g
+
+</div>
